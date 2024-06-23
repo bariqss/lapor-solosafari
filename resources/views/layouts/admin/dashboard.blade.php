@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-theme="dark" x-data="data()" lang="en">
+<html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
 
 <head>
     <meta charset="UTF-8" />
@@ -8,6 +8,9 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet" />
+
+    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css','resources/js/app.js'])
 
     <link rel="stylesheet" href="{{ asset('assets/css/tailwind.output.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/tailwind.css') }}" />

@@ -7,8 +7,14 @@ export default {
     "./node_modules/flowbite/**/*.js"
   ],
   theme: {
-    extend: {},
+    colors: {
+      green: '#3F8D72',
+    },
+    backgroundImage: {
+        'bg-solo-safari': "url('/images/bg-solo-safari.png')",
+    }
   },
+  
   fontFamily: {
       'body': [
     'Inter'

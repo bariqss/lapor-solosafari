@@ -1,8 +1,12 @@
+@extends('layouts.user.dashboard')
+
+@section('content')
+
 <div class="flex flex-col mt-6 mb-6 p-10 rounded-lg shadow-md dark:bg-gray-800">
     <div class="flex justify-center">
         <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Laporkan Kejadian</h2>
     </div>
-    <form action="{{ route('user.store') }}">
+    <form action="{{ route('laporan.create.post') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
             <div class="sm:col-span-2">
@@ -97,3 +101,4 @@
         </div>
     </form>
 </div>
+@endsection

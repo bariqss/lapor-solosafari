@@ -24,10 +24,10 @@
         <!-- Mobile sidebar -->
 
         <div class="flex flex-col flex-1 w-full">
-            @include('layouts.user.navbar')
+            @include('layouts.guest.navbar')
 
             <main class="h-full pb-16 overflow-y-auto">
-                <div class="container grid px-10">
+                <div class="container grid px-6">
                     <div>
                         @yield('breadcrumb')
                     </div>

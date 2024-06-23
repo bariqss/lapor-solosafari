@@ -8,7 +8,7 @@
         </div>
         <ul class="mt-6">
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:text-green dark:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group"
                     href="index.html">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -22,8 +22,8 @@
         </ul>
         <ul>
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                    href="forms.html">
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group"
+                    href="{{ route('laporan.index') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path
@@ -34,7 +34,7 @@
                 </a>
             </li>
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group"
                     href="cards.html">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -67,11 +67,9 @@
             </a>
         </div>
         <ul class="mt-6">
-            <li class="relative px-6 py-3">
-                <span class="absolute inset-y-0 left-0 w-1 bg-white rounded-tr-lg rounded-br-lg"
-                    aria-hidden="true"></span>
-                <a class="inline-flex items-center w-full text-sm font-semibold text-white transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                    href="index.html">
+            <li class="relative px-6 py-2">
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group"
+                    href="#">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path
@@ -83,20 +81,20 @@
             </li>
         </ul>
         <ul>
-            <li class="relative px-6 py-3">
-                <a class="inline-flex items-center w-full text-sm font-medium transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                    href="forms.html">
+            <li class="relative px-6 py-2">
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group"
+                    href="{{ route('laporan.index') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path
                             d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
                         </path>
                     </svg>
-                    <span class="ml-4">Laporkan Keja</span>
+                    <span class="ml-4">Laporkan Kejadian</span>
                 </a>
             </li>
-            <li class="relative px-6 py-3">
-                <a class="inline-flex items-center w-full text-sm font-medium transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+            <li class="relative px-6 py-2">
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group"
                     href="cards.html">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -107,12 +105,5 @@
                     <span class="ml-4">Riwayat Laporan</span>
                 </a>
             </li>
-            <div class="px-6 my-6">
-                <button
-                    class="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                    Create account
-                    <span class="ml-2" aria-hidden="true">+</span>
-                </button>
-            </div>
     </div>
 </aside>
