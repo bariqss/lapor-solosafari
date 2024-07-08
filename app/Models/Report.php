@@ -31,7 +31,7 @@ class Report extends Model
 
     public function location(): HasMany
     {
-        return $this->HasMany(Location::class, 'id_report');
+        return $this->hasMany(Location::class, 'id_report');
     }
 
     protected static function booted(): void

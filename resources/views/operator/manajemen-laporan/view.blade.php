@@ -5,14 +5,14 @@
     <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
         <li class="inline-flex items-center">
             <a href="{{ route('manajemen-laporan.index') }}"
-                class="inline-flex items-center text-sm font-medium text-gray-400 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                class="inline-flex items-center text-sm font-medium text-gray-400 hover:text-blue-600">
                 Operator
             </a>
         </li>
         <li>
             <div class="flex items-center">
                 <span class="mx-2 text-gray-400">/</span>
-                <span class="ms-1 text-sm font-medium text-gray-700 md:ms-2 dark:text-gray-400 dark:hover:text-white">
+                <span class="ms-1 text-sm font-medium text-gray-700 md:ms-2">
                     Detail Laporan
                 </span>
             </div>
@@ -22,9 +22,9 @@
 @endsection
 
 @section('content')
-<div class="flex flex-col mt-6 mb-6 p-10 rounded-lg shadow-md  bg-white dark:bg-gray-800">
+<div class="flex flex-col mt-6 mb-6 p-10 rounded-lg shadow-md  bg-white">
     <div class="flex justify-center">
-        <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Detail Laporan</h2>
+        <h2 class="mb-4 text-xl font-bold text-gray-900">Detail Laporan</h2>
     </div>
     <div class="container-fluid py-4 px-3">
         <div class="row">
@@ -44,13 +44,13 @@
                 <h2 class="font-semibold">Level Kejadian</h2>
                 @if ($report->level == 1)
                 <span
-                    class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">Rendah</span>
+                    class="bg-green-100 text-green-800 text-sm font-medium me-2 px-3 py-1 rounded-full">RENDAH</span>
                 @elseif($report->level == 2)
                 <span
-                    class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300">Sedang</span>
+                    class="bg-yellow-100 text-yellow-800 text-sm font-medium me-2 px-3 py-1 rounded-full">SEDANG</span>
                 @else
                 <span
-                    class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">Tinggi</span>
+                    class="bg-red-100 text-red-800 text-sm font-medium me-2 px-3 py-1 rounded-full">TINGGI</span>
                 @endif
             </div>
             <div class="mb-4">

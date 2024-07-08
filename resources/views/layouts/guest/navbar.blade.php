@@ -1,5 +1,5 @@
-<header class="z-10 py-4 bg-white shadow-md dark:bg-gray-800">
-    <div class="container flex items-center justify-between h-full px-6 mx-auto text-green-500 dark:text-green-300">
+<header class="z-10 py-4 bg-white shadow-md">
+    <div class="container flex items-center justify-between h-full px-6 mx-auto text-green-500">
         <!-- Mobile hamburger -->
         <button class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-green"
             @click="toggleSideMenu" aria-label="Menu">
@@ -38,7 +38,7 @@
             <!-- Profile menu -->
             <li class="flex">
                 <button type="button"
-                    class="text-green hover:text-white border-2 border-green-500 hover:bg-green-700 focus:shadow-outline-green focus:outline-none font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2 dark:border-green-500 dark:text-green-500 dark:hover:text-white dark:hover:bg-green-600 dark:focus:ring-green-800">
+                    class="text-green hover:text-white border-2 border-green-500 hover:bg-green-700 focus:shadow-outline-green focus:outline-none font-medium rounded-lg text-xs px-3 py-2 text-center me-2 mb-2">
                     Login
                 </button>
             </li>

@@ -7,10 +7,7 @@ use App\Models\Image;
 use App\Models\Location;
 use App\Models\Report;
 use App\Models\ReportCategory;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
-
-use Torann\GeoIP\GeoIP;
 
 class ReportController extends Controller
 {
@@ -44,20 +41,18 @@ class ReportController extends Controller
             'tanggal' => 'required',
             'kategori' => 'required',
             'level' => 'required',
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric',
+            'latitude' => 'required',
+            'longitude' => 'required',
             'deskripsi' => 'required',
             'gambar' => 'required|max:1024',
         ]);
-
-        // $report->return_date = Carbon::parse($report->return_date)->format('d/m/Y');
 
         $fileName = time() . '.' . $request->gambar->extension();
         $request->gambar->move(public_path('assets/images'), $fileName);
 
         $location = Location::create([
-            'latitude' => $request->latitude,
-            'longitude' => $request->longitude,
+            'latitude' => $request['latitude'],
+            'longitude' => $request['longitude'],
         ]);
 
         $report = Report::create([
@@ -79,7 +74,9 @@ class ReportController extends Controller
 
     public function show(string $id)
     {
+        $location = Location::where('id', $id)->firstOrFail();
+        $categories = ReportCategory::all();
         $report = Report::where('id', $id)->firstOrFail();
-        return view('user.laporan.view', compact('report'));
+        return view('user.laporan.view', compact('report', 'categories', 'location'));
     }
 }

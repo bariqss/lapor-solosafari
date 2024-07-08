@@ -1,4 +1,4 @@
-<aside class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
+<aside class="z-20 hidden w-64 overflow-y-auto bg-white md:block flex-shrink-0">
     <div class="py-4">
         <div class="flex justify-center">
             <a href="index.html">
@@ -7,8 +7,8 @@
         </div>
         <ul class="mt-6">
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 dark:text-white dark:hover:text-green-500 dark:hover:bg-gray-700 group"
-                    href="index.html">
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 group"
+                    href="{{ route('admin.dashboard') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path
@@ -21,20 +21,20 @@
         </ul>
         <ul>
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 dark:text-white dark:hover:text-green-500 dark:hover:bg-gray-700 group"
-                    href="{{ route('manajemen-pelaporan.index') }}">
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 group"
+                    href="{{ route('admin.manajemen-pelaporan.index') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path
                             d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
                         </path>
                     </svg>
-                    <span class="ml-4">Manajemen Laporan</span>
+                    <span class="ml-4">Manajemen Pelaporan</span>
                 </a>
             </li>
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 dark:text-white dark:hover:text-green-500 dark:hover:bg-gray-700 group"
-                    href="{{ route('manajemen-role.index') }}">
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 group"
+                    {{-- href="{{ route('manajemen-role.index') }}"> --}}
                     <svg class="w-5 h-5" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                         <path stroke-linecap="round" stroke-linejoin="round"
@@ -53,13 +53,13 @@
     x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0"
     class="fixed inset-0 z-10 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center"></div>
-<aside class="fixed inset-y-0 z-20 flex-shrink-0 w-64 mt-16 overflow-y-auto bg-white dark:bg-gray-800 md:hidden"
-    x-show="isSideMenuOpen" x-transition:enter="transition ease-in-out duration-150"
+<aside class="fixed inset-y-0 z-20 flex-shrink-0 w-64 mt-16 overflow-y-auto bg-white md:hidden" x-show="isSideMenuOpen"
+    x-transition:enter="transition ease-in-out duration-150"
     x-transition:enter-start="opacity-0 transform -translate-x-20" x-transition:enter-end="opacity-100"
     x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0 transform -translate-x-20" @click.away="closeSideMenu"
     @keydown.escape="closeSideMenu">
-    <div class=" py-4 text-gray-500 dark:text-gray-400">
+    <div class=" py-4 text-gray-500">
         <div class="flex justify-center">
             <a href="index.html">
                 <img src="{{ asset('assets/img/logo-solo-safari.png') }}" alt="logo" style="height: 100px">
@@ -67,8 +67,8 @@
         </div>
         <ul class="mt-6">
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 dark:text-white dark:hover:text-green-500 dark:hover:bg-gray-700 group"
-                    href="{{ route('manajemen-pelaporan.index') }}">
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 group"
+                    href="{{ route('admin.dashboard') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path
@@ -81,8 +81,8 @@
         </ul>
         <ul>
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 dark:text-white dark:hover:text-green-500 dark:hover:bg-gray-700 group"
-                    href="{{ route('manajemen-pelaporan.index') }}">
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 group"
+                    href="{{ route('admin.manajemen-pelaporan.index') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path
@@ -93,8 +93,8 @@
                 </a>
             </li>
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 dark:text-white dark:hover:text-green-500 dark:hover:bg-gray-700 group"
-                    href="{{ route('manajemen-role.index') }}">
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 group"
+                    {{-- href="{{ route('manajemen-role.index') }}"> --}}
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path

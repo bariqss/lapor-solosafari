@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\operator;
 
 use App\Http\Controllers\Controller;
+use App\Models\Location;
 use App\Models\Report;
 use App\Models\ReportCategory;
 use Carbon\Carbon;
@@ -43,17 +44,18 @@ class ReportController extends Controller
     {
         $report = Report::where('id', $id)->firstOrFail();
 
-        return view('operator.manajemen-laporan.view', compact('report'));
+        return view('operator.manajemen-laporan.view', compact('report', 'location'));
     }
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
+        $location = Location::where('id', $id)->firstOrFail();
         $categories = ReportCategory::all();
         $report = Report::where('id', $id)->firstOrFail();
 
-        return view('operator.manajemen-laporan.edit', compact('report', 'categories'));
+        return view('operator.manajemen-laporan.edit', compact('report', 'categories', 'location'));
     }
 
     /**

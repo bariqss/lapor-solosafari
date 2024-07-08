@@ -10,7 +10,7 @@ class Location extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['latitude', 'longtitude'];
+    protected $fillable = ['latitude', 'longitude'];
 
     public function report(): BelongsTo
     {

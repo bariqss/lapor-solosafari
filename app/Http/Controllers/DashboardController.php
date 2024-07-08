@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Report;
 use Illuminate\Http\Request;
 
-class RoleController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,7 +13,8 @@ class RoleController extends Controller
     public function index()
     {
         $reports = Report::all();
-        return view('admin.manajemen-role.index', compact('reports'));
+
+        return view('dashboard', compact('reports'));
     }
 
     /**

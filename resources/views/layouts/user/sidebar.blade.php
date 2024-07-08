@@ -1,4 +1,4 @@
-<aside class="z-20 hidden w-64 overflow-y-auto bg dark:bg-gray-800 md:block flex-shrink-0"
+<aside class="z-20 hidden w-64 overflow-y-auto bg md:block flex-shrink-0"
     style="background-color: #3F8D72">
     <div class="py-4">
         <div class="flex justify-center">
@@ -8,7 +8,7 @@
         </div>
         <ul class="mt-6">
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group"
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black group"
                     href="{{ route('laporan.index') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -22,7 +22,7 @@
         </ul>
         <ul>
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group"
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black group"
                     href="{{ route('laporan.create') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -34,7 +34,7 @@
                 </a>
             </li>
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group"
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black group"
                     href="{{ route('laporan.riwayat') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -54,13 +54,13 @@
     x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0"
     class="fixed inset-0 z-10 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center"></div>
-<aside class="fixed inset-y-0 z-20 flex-shrink-0 w-64 mt-16 overflow-y-auto bg-white dark:bg-gray-800 md:hidden"
+<aside class="fixed inset-y-0 z-20 flex-shrink-0 w-64 mt-16 overflow-y-auto bg-white md:hidden"
     x-show="isSideMenuOpen" x-transition:enter="transition ease-in-out duration-150"
     x-transition:enter-start="opacity-0 transform -translate-x-20" x-transition:enter-end="opacity-100"
     x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0 transform -translate-x-20" @click.away="closeSideMenu"
     @keydown.escape="closeSideMenu" style="background-color: #3F8D72">
-    <div class=" py-4 text-gray-500 dark:text-gray-400">
+    <div class=" py-4 text-gray-500">
         <div class="flex justify-center">
             <a href="index.html">
                 <img src="{{ asset('assets/img/logo-solo-safari-white.png') }}" alt="logo" style="height: 100px">
@@ -68,7 +68,7 @@
         </div>
         <ul class="mt-6">
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group"
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black group"
                     href="{{ route('laporan.index') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -82,7 +82,7 @@
         </ul>
         <ul>
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group"
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black group"
                     href="{{ route('laporan.create') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -94,7 +94,7 @@
                 </a>
             </li>
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black dark:hover:bg-gray-700 group"
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black group"
                     href="{{ route('laporan.riwayat') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">

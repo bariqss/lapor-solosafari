@@ -1,17 +1,14 @@
 <?php
 
-use App\Http\Controllers\LocationController;
-use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\operator\ReportController as OperatorReportController;
-use App\Http\Controllers\PelaporanController;
-use App\Http\Controllers\ReportCategoryController;
-use App\Http\Controllers\RoleController;
 use App\Http\Controllers\user\ReportController as UserReportController;
-use App\Models\Report;
-use App\Models\ReportCategory;
-use Illuminate\Routing\RouteGroup;
+use App\Http\Controllers\PelaporanController;
+use App\Http\Controllers\PetugasController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ReportCategoryController;
 use Illuminate\Support\Facades\Route;
-use PHPUnit\Framework\Constraint\Operator;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,57 +21,81 @@ use PHPUnit\Framework\Constraint\Operator;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/*------------------------ Route Admin ------------------------ */
+Route::prefix('/admin')->name('admin.')->middleware(['admin', 'verified'])->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
 
-Route::get('/login', function () {
-    return view('auth.login');
-});
 
-Route::get('/register', function () {
-    return view('auth.register');
-});
-
-Route::get('/admin', function () {
-    return view('admin.index');
-});
-
-Route::prefix('/manajemen-pelaporan')->name('manajemen-pelaporan.')->group(function () {
-    Route::get('/', [PelaporanController::class, 'index'])->name('index');
-
-    Route::prefix('/category')->name('category.')->group(function () {
-        Route::post('/create', [ReportCategoryController::class, 'store'])->name('store');
-        Route::post('/update/{id}', [ReportCategoryController::class, 'update'])->name('update');
-        Route::get('/update/{id}', [ReportCategoryController::class, 'edit'])->name('edit');
-        Route::post('/update/{id}', [ReportCategoryController::class, 'update'])->name('update');
-        Route::get('/delete/{id}', [ReportCategoryController::class, 'destroy'])->name('delete');
+    Route::prefix('/manajemen-pelaporan')->name('manajemen-pelaporan.')->group(function () {
+        Route::get('/', [PelaporanController::class, 'index'])->name('index');
+        
+        Route::prefix('/category')->name('category.')->group(function () {
+            Route::post('/create', [ReportCategoryController::class, 'store'])->name('store');
+            Route::post('/update/{id}', [ReportCategoryController::class, 'update'])->name('update');
+            Route::get('/update/{id}', [ReportCategoryController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}', [ReportCategoryController::class, 'update'])->name('update');
+            Route::get('/delete/{id}', [ReportCategoryController::class, 'destroy'])->name('delete');
+        });
     });
 });
+/*------------------------ End Route Admin -------------------- */
 
-Route::prefix('/manajemen-role')->name('manajemen-role.')->group(function () {
-    Route::get('/', [RoleController::class, 'index'])->name('index');
-    Route::get('/view', [RoleController::class, 'index'])->name('index');
+/*------------------------ Route Operator -------------------- */
+Route::prefix('/operator')->name('operator.')->middleware(['operator', 'verified'])->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('operator.manajemen-laporan.index');
+    })->name('dashboard');
+
+    Route::prefix('/manajemen-laporan')->name('manajemen-laporan.')->group(function () {
+        Route::get('/', [OperatorReportController::class, 'index'])->name('index');
+        Route::get('/create', [OperatorReportController::class, 'create'])->name('create');
+        Route::post('/create', [OperatorReportController::class, 'store'])->name('store');
+        Route::get('/view/{id}', [OperatorReportController::class, 'show'])->name('view');
+        Route::get('/update/{id}', [OperatorReportController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [OperatorReportController::class, 'update'])->name('update');
+        Route::get('/delete/{id}', [OperatorReportController::class, 'destroy'])->name('delete');
+    });
+
+    Route::prefix('/manajemen-petugas')->name('manajemen-petugas.')->group(function () {
+        Route::get('/', [PetugasController::class, 'index'])->name('index');
+    });
+});
+/*------------------------ End Route Operator -------------------- */
+
+
+/*------------------------ Route User -------------------- */
+Route::prefix('/user')->name('user.')->middleware(['user', 'verified'])->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('user.laporan.index');
+    })->name('dashboard');
+
+    Route::prefix('/laporan')->name('laporan.')->group(function () {
+        Route::get('/', [UserReportController::class, 'index'])->name('index');
+        Route::get('/create', [UserReportController::class, 'create'])->name('create');
+        Route::post('/create', [UserReportController::class, 'store'])->name('create.post');
+        Route::get('/view', [UserReportController::class, 'view'])->name('view');
+    });
+
+    Route::prefix('/riwayat-laporan')->name('riwayat-laporan.')->group(function () {
+        Route::get('/', [UserReportController::class, 'riwayat'])->name('riwayat');
+    });
+});
+/*------------------------ End Route User -------------------- */
+
+Route::get('/', function () {
+    Route::get('/', [DashboardController::class, 'index'])->name('index');
 });
 
-Route::prefix('/manajemen-laporan')->name('manajemen-laporan.')->group(function () {
-    Route::get('/', [OperatorReportController::class, 'index'])->name('index');
-    Route::get('/update/{id}', [OperatorReportController::class, 'edit'])->name('edit');
-    Route::post('/update/{id}', [OperatorReportController::class, 'update'])->name('update');
-    Route::get('/delete/{id}', [OperatorReportController::class, 'destroy'])->name('delete');
-});
 
-Route::prefix('/manajemen-petugas')->name('manajemen-petugas.')->group(function () {
-    Route::get('/', [PetugasController::class, 'index'])->name('index');
-    Route::put('/create', [PetugasController::class, 'store'])->name('create.post');
-    Route::get('/view/{id}', [PetugasController::class, 'store'])->name('view');
-    Route::get('/delete/{id}', [PetugasController::class, 'destroy'])->name('delete');
-});
+// Route::middleware('auth')->group(function () {
+//         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//         Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//         Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+//     });
+    
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
+    // })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::prefix('/laporan')->name('laporan.')->group(function () {
-    Route::get('/', [UserReportController::class, 'index'])->name('index');
-    Route::get('/riwayat', [UserReportController::class, 'riwayat'])->name('riwayat');
-    Route::get('/create', [UserReportController::class, 'create'])->name('create');
-    Route::post('/create', [UserReportController::class, 'store'])->name('create.post');
-    Route::get('/view/{id}', [UserReportController::class, 'show'])->name('view');
-});
+    require __DIR__.'/auth.php';
+    

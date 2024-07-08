@@ -5,12 +5,12 @@
     <div class="w-full overflow-x-auto">
         <table class="w-full whitespace-no-wrap">
             <caption
-                class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white dark:text-white dark:bg-gray-800">
+                class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white">
                 Riwayat Kejadian
             </caption>
             <thead>
                 <tr
-                    class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800">
+                    class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase bg-gray-50">
                     <th class="px-4 py-3">Judul Laporan</th>
                     <th class="px-4 py-3">Tanggal</th>
                     <th class="px-4 py-3">Kategori</th>
@@ -19,8 +19,8 @@
                     <th class="px-4 py-3"></th>
                 </tr>
             </thead>
-            <tbody class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800">
-                <tr class="text-gray-700 dark:text-gray-400">
+            <tbody class="bg-white divide-y">
+                <tr class="text-gray-700">
                     <td class="px-4 py-3 ">
                         <div class="flex items-center text-sm">
                             <div>
@@ -36,20 +36,20 @@
                     </td>
                     <td class="px-4 py-3 text-xs">
                         <span
-                            class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
+                            class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full">
                             {{$report->level}}
                         </span>
                     </td>
                     <td class="px-4 py-3 text-xs">
                         <span
-                            class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+                            class="bg-green-100 text-green-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded">
                             Tertangani
                         </span>
                     </td>
                     <td class="px-4 py-3 text-xs">
                         <a href="{{ route('laporan.view', $report->id) }}">
                             <button type="button"
-                                class="px-3 py-2 focus:outline-none text-sm text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                class="px-3 py-2 focus:outline-none text-sm text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
                                 Detail
                             </button>
                         </a>
@@ -58,7 +58,7 @@
             </tbody>
         </table>
         <div
-            class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
+            class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t bg-gray-50 sm:grid-cols-9">
             <span class="flex items-center col-span-3">
                 Showing 1-10 of 50
             </span>

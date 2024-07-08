@@ -36,7 +36,7 @@ class PetugasController extends Controller
 
         $user = User::create([
             'name' => $request->fullname,
-            'no_telp' => $request->no_telp,
+            'telepon' => $request->telepon,
             'email' => $request->email,
             'password' => $request->password,
             'role' => $request->role,
