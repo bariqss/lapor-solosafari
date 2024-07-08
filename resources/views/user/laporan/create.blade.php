@@ -1,8 +1,12 @@
+@extends('layouts.user.dashboard')
+
+@section('content')
+
 <div class="flex flex-col mt-6 mb-6 p-10 rounded-lg shadow-md dark:bg-gray-800">
     <div class="flex justify-center">
         <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Laporkan Kejadian</h2>
     </div>
-    <form action="{{ route('user.store') }}">
+    <form action="{{ route('laporan.create.post') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
             <div class="sm:col-span-2">
@@ -35,9 +39,9 @@
                 <select id="level" name="level"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
                     <option selected="">Pilih Level</option>
-                    <option value="Rendah">Rendah</option>
-                    <option value="Sedang">Sedang</option>
-                    <option value="Tinggi">Tinggi</option>
+                    <option value="1">Rendah</option>
+                    <option value="2">Sedang</option>
+                    <option value="3">Tinggi</option>
                 </select>
             </div>
             <div>
@@ -46,20 +50,32 @@
                 <select id="category" name="kategori"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
                     <option selected="">Pilih Kategori</option>
-                    <option value="HW">Hewan Solo Safari</option>
-                    <option value="FS">Fasilitas Solo Safari</option>
-                    <option value="PT">Petugas Solo Safari</option>
+                    @foreach ($categories as $item)
+                    <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
+                    @endforeach
                 </select>
             </div>
-            <div>
-                <label for="lokasi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Lokasi
+            <div class="sm:col-span-2">
+                <label for="lokasi" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Lokasi
                 </label>
-                <select id="lokasi" name="lokasi"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
-                    <option selected="">Pilih Lokasi</option>
-                    <option value="TV">Harimau</option>
-                    <option value="PC">Fasilitas Solo Safari</option>
-                </select>
+                <button type="button" id="getLocationBtn" onclick="getLocation()"
+                    class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Get
+                    Location</button>
+            </div>
+            <div>
+                <label for="latitude" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Latitude</label>
+                <input type="text" name="latitude" id="latitude"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                    placeholder="Latitude" value="" required="">
+            </div>
+            <div>
+                <label for="longitude" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Longitude</label>
+                <input type="text" name="longitude" id="longitude"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                    placeholder="Longitude" value="" required="">
             </div>
             <div class="flex flex-col justify-center w-full">
                 <label for="category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Upload
@@ -97,3 +113,72 @@
         </div>
     </form>
 </div>
+
+<script>
+    const x = document.getElementById("latitude");
+    const y = document.getElementById("longitude");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  x.value = position.coords.latitude;
+  y.value = position.coords.longitude;
+}
+</script>
+
+{{-- <script>
+    document.getElementById('getLocationBtn').addEventListener('click', function() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(sendLocation, handleError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        });
+
+        function sendLocation(position) {
+            const csrfToken = document.querySelector('input[name="_token"]').value;
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            fetch('/laporan/getlocation', {
+                method: 'POST',
+                headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': csrfToken,
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred: ' + error.message);
+            });
+        }
+
+        function handleError(error) {
+            console.error('Geolocation error:', error);
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
+</script> --}}
+@endsection

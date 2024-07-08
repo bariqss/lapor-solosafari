@@ -4,8 +4,13 @@ namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
 use App\Models\Image;
+use App\Models\Location;
 use App\Models\Report;
+use App\Models\ReportCategory;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+
+use Torann\GeoIP\GeoIP;
 
 class ReportController extends Controller
 {
@@ -16,18 +21,20 @@ class ReportController extends Controller
     {
         $reports = Report::all();
 
-        return view('user.riwayat-laporan.index', compact('reports'));
+        return view('user.dashboard', compact('reports'));
     }
 
-    public function home()
+    public function riwayat()
     {
-        $reports = Report::all();
-        return view('user.index', compact('reports'));
+        $report = Report::all();
+        return view('user.riwayat-laporan.index', compact('report'));
     }
 
     public function create()
     {
-        return view('user.laporan.index');
+        $reports = Report::all();
+        $categories = ReportCategory::all();
+        return view('user.laporan.create', compact('reports', 'categories'));
     }
 
     public function store(Request $request)
@@ -37,19 +44,28 @@ class ReportController extends Controller
             'tanggal' => 'required',
             'kategori' => 'required',
             'level' => 'required',
-            'lokasi' => 'required',
+            'latitude' => 'required|numeric',
+            'longitude' => 'required|numeric',
             'deskripsi' => 'required',
             'gambar' => 'required|max:1024',
         ]);
+
+        // $report->return_date = Carbon::parse($report->return_date)->format('d/m/Y');
+
         $fileName = time() . '.' . $request->gambar->extension();
-        $request->gambar->move(public_path('assets/images'));
+        $request->gambar->move(public_path('assets/images'), $fileName);
+
+        $location = Location::create([
+            'latitude' => $request->latitude,
+            'longitude' => $request->longitude,
+        ]);
 
         $report = Report::create([
             'name' => $request->judul,
             'date' => $request->tanggal,
-            'category' => $request->kategori,
+            'id_category' => $request->kategori,
             'level' => $request->level,
-            'lokasi' => $request->lokasi,
+            'id_location' => $location->id,
             'description' => $request->deskripsi,
         ]);
 
@@ -58,12 +74,12 @@ class ReportController extends Controller
             'id_report' => $report->id,
         ]);
 
-        return redirect(route('laporan.home'))->with('success', 'Laporan berhasil dikirim');
+        return redirect(route('manajemen-laporan.index'))->with('success', 'Laporan berhasil dikirim');
     }
 
-
-    public function view()
+    public function show(string $id)
     {
-        return view('user.laporan.view');
+        $report = Report::where('id', $id)->firstOrFail();
+        return view('user.laporan.view', compact('report'));
     }
 }

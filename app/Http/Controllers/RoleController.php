@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Delegasi;
+use App\Models\Report;
 use Illuminate\Http\Request;
 
-class DelegasiController extends Controller
+class RoleController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $reports = Report::all();
+        return view('admin.manajemen-role.index', compact('reports'));
     }
 
     /**
@@ -34,7 +35,7 @@ class DelegasiController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Delegasi $delegasi)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +43,7 @@ class DelegasiController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Delegasi $delegasi)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +51,7 @@ class DelegasiController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Delegasi $delegasi)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +59,7 @@ class DelegasiController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Delegasi $delegasi)
+    public function destroy(string $id)
     {
         //
     }

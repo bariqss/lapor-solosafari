@@ -2,17 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Image;
+use App\Models\ReportCategory;
 use Illuminate\Http\Request;
 
-class ImageController extends Controller
+class PelaporanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $categories = ReportCategory::paginate(5, ['*'], 'list_category');
+
+        return view('admin.manajemen-pelaporan.index', compact('categories'));
     }
 
     /**
@@ -34,7 +36,7 @@ class ImageController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Image $image)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +44,7 @@ class ImageController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Image $image)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +52,7 @@ class ImageController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Image $image)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +60,7 @@ class ImageController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Image $image)
+    public function destroy(string $id)
     {
         //
     }

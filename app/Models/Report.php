@@ -12,21 +12,26 @@ class Report extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'id_user', 'date', 'id_location', 'category', 'description', 'level', 'status'];
+    protected $fillable = ['name', 'id_user', 'date', 'id_location', 'id_category', 'description', 'level', 'status'];
 
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class, 'id_user');
     }
 
-    public function decumentation_image(): BelongsTo
+    public function category(): BelongsTo
     {
-        return $this->belongsTo(Image::class, 'id_image');
+        return $this->belongsTo(ReportCategory::class, 'id_category');
+    }
+
+    public function decumentation_image(): HasMany
+    {
+        return $this->hasMany(Image::class, 'id_report');
     }
 
     public function location(): HasMany
     {
-        return $this->HasMany(Location::class, 'id_location');
+        return $this->HasMany(Location::class, 'id_report');
     }
 
     protected static function booted(): void

@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="flex flex-col mt-6 mb-6 p-10 rounded-lg shadow-md dark:bg-gray-800">
+<div class="flex flex-col mt-6 mb-6 p-10 rounded-lg shadow-md bg-white dark:bg-gray-800">
     <div class="flex justify-center">
         <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Laporkan Kejadian</h2>
     </div>
@@ -39,9 +39,9 @@
                 <select id="level" name="level"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
                     <option selected="">Pilih Level</option>
-                    <option value="Rendah">Rendah</option>
-                    <option value="Sedang">Sedang</option>
-                    <option value="Tinggi">Tinggi</option>
+                    <option value="1">Rendah</option>
+                    <option value="2">Sedang</option>
+                    <option value="3">Tinggi</option>
                 </select>
             </div>
             <div>
@@ -50,9 +50,9 @@
                 <select id="category" name="kategori"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
                     <option selected="">Pilih Kategori</option>
-                    <option value="HW">Hewan Solo Safari</option>
-                    <option value="FS">Fasilitas Solo Safari</option>
-                    <option value="PT">Petugas Solo Safari</option>
+                    @foreach ($categories as $item)
+                    <option value="{{ $item->id }}">{{ $item->nama_kategori }}</option>
+                    @endforeach
                 </select>
             </div>
             <div>
@@ -61,8 +61,8 @@
                 <select id="lokasi" name="lokasi"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
                     <option selected="">Pilih Lokasi</option>
-                    <option value="TV">Harimau</option>
-                    <option value="PC">Fasilitas Solo Safari</option>
+                    <option value="1">Danau</option>
+                    <option value="2">Solo Safari</option>
                 </select>
             </div>
             <div class="flex flex-col justify-center w-full">

@@ -1,14 +1,17 @@
-<aside class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0">
+<aside class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0"
+    style="background-color: #696CFF">
     <div class="py-4">
         <div class="flex justify-center">
             <a href="index.html">
-                <img src="{{ asset('assets/img/logo-solo-safari.png') }}" alt="logo" style="height: 100px">
+                <img src="{{ asset('assets/img/logo-solo-safari-white.png') }}" alt="logo" style="height: 100px">
             </a>
         </div>
         <ul class="mt-6">
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 dark:text-white dark:hover:text-green-500 dark:hover:bg-gray-700 group"
-                    href="index.html">
+                <span class="absolute inset-y-0 left-0 w-1 bg-white rounded-tr-lg rounded-br-lg" aria-hidden="true" {{
+                    \Request::segment(2)=='dashboard' ? 'active' : '' }}></span>
+                <a class="inline-flex p-3 items-center w-full text-sm text-white font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:font-semibold hover:text-gray-700 dark:text-white dark:hover:text-purple-500 dark:hover:bg-gray-700 group"
+                    href="{{ route('manajemen-laporan.index') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path
@@ -21,8 +24,8 @@
         </ul>
         <ul>
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 dark:text-white dark:hover:text-green-500 dark:hover:bg-gray-700 group"
-                    href="forms.html">
+                <a class="inline-flex p-3 items-center w-full text-sm text-white font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:font-semibold hover:text-gray-700 dark:text-white dark:hover:text-purple-500 dark:hover:bg-gray-700 group"
+                    href="{{ route('manajemen-petugas.index') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path
@@ -46,7 +49,7 @@
     x-transition:enter-start="opacity-0 transform -translate-x-20" x-transition:enter-end="opacity-100"
     x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0 transform -translate-x-20" @click.away="closeSideMenu"
-    @keydown.escape="closeSideMenu">
+    @keydown.escape="closeSideMenu" style="background-color: #696CFF">
     <div class=" py-4 text-gray-500 dark:text-gray-400">
         <div class="flex justify-center">
             <a href="index.html">
@@ -55,7 +58,7 @@
         </div>
         <ul class="mt-6">
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 dark:text-white dark:hover:text-green-500 dark:hover:bg-gray-700 group"
+                <a class="inline-flex p-2 items-center w-full text-sm text-white font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:font-semibold hover:text-gray-700 dark:text-white dark:hover:text-purple-500 dark:hover:bg-gray-700 group"
                     href="index.html">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -69,27 +72,15 @@
         </ul>
         <ul>
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 dark:text-white dark:hover:text-green-500 dark:hover:bg-gray-700 group"
-                    href="forms.html">
+                <a class="inline-flex p-2 items-center w-full text-sm text-white font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:font-semibold hover:text-gray-700 dark:text-white dark:hover:text-purple-500 dark:hover:bg-gray-700 group"
+                    href="">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path
                             d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
                         </path>
                     </svg>
-                    <span class="ml-4">Laporkan Keja</span>
-                </a>
-            </li>
-            <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 dark:text-white dark:hover:text-green-500 dark:hover:bg-gray-700 group"
-                    href="cards.html">
-                    <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                        stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                        <path
-                            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10">
-                        </path>
-                    </svg>
-                    <span class="ml-4">Riwayat Laporan</span>
+                    <span class="ml-4">Manajemen Petugas</span>
                 </a>
             </li>
         </ul>

@@ -11,7 +11,7 @@ export default {
       green: '#3F8D72',
     },
     backgroundImage: {
-        'bg-solo-safari': "url('/images/bg-solo-safari.png')",
+        'bg-solo-safari': "url('/img/bg-solo-safari.png')",
     }
   },
   

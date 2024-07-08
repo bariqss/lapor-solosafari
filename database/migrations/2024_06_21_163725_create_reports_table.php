@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('id_user');
             $table->date('date');
             $table->unsignedBigInteger('id_location');
-            $table->string('category');
+            $table->unsignedBigInteger('id_category');
             $table->text('description');
             $table->string('level');
             $table->string('status');

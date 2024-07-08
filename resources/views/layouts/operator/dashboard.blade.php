@@ -25,12 +25,14 @@
         <div class="flex flex-col flex-1 w-full">
             @include('layouts.operator.navbar')
 
-            <main class="h-full overflow-y-auto">
-                <div>
-                    @yield('breadcrumb')
-                </div>
+            <main class="h-full pb-10 overflow-y-auto">
+                <div class="container grid px-10">
+                    <div>
+                        @yield('breadcrumb')
+                    </div>
 
-                @yield('content')
+                    @yield('content')
+                </div>
             </main>
         </div>
     </div>

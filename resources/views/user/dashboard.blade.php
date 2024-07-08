@@ -1,9 +1,22 @@
 @extends('layouts.user.dashboard')
 
 @section('content')
-<div class="mt-8 mb-4">
-    <h1 class="text-2xl font-bold text-green-700 dark:text-white">Selamat Datang,</h1>
-    <p class="text-md">Web Pelaporan Kejadian Solo Safari !!</p>
+<div class="flex flex-col mt-6 mb-6 shadow-md">
+    <div
+        class="bg-center bg-no-repeat bg-[url('/resources/img/bg-solo-safari.jpg')] rounded-lg bg-gray-400 bg-blend-multiply">
+        <div class="px-4 max-w-screen-xl text-center py-24 lg:py-30">
+            <h1 class="mb-4 text-3xl font-extrabold tracking-tight leading-none text-white">
+                Laporkan Kejadian
+            </h1>
+            <p class="mb-4 text-lg text-white">Silahkan login terlebih dahulu untuk melaporkan kejadian</p>
+            <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
+                <a href="{{ route('laporan.create')}}"
+                    class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-green-600 hover:bg-green-800 focus:ring-4 focus:ring-green-200 dark:focus:ring-green-900">
+                    Laporkan
+                </a>
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="w-full p-4 mt-6 mb-6 overflow-hidden bg-white rounded-lg shadow-lg">
@@ -38,13 +51,19 @@
                         {{$report->date}}
                     </td>
                     <td class="px-4 py-3 text-sm">
-                        {{$report->category}}
+                        {{$report->category->nama_kategori}}
                     </td>
                     <td class="px-4 py-3 text-xs">
+                        @if ($report->level == 1)
                         <span
-                            class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100">
-                            {{$report->level}}
-                        </span>
+                            class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-green-900 dark:text-green-300">Rendah</span>
+                        @elseif($report->level == 2)
+                        <span
+                            class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-yellow-900 dark:text-yellow-300">Sedang</span>
+                        @else
+                        <span
+                            class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full dark:bg-red-900 dark:text-red-300">Tinggi</span>
+                        @endif
                     </td>
                     <td class="px-4 py-3 text-xs">
                         <span
@@ -53,10 +72,12 @@
                         </span>
                     </td>
                     <td class="px-4 py-3 text-xs">
-                        <button type="button"
-                            class="px-3 py-2 focus:outline-none text-sm text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
-                            Detail
-                        </button>
+                        <a href="{{ route('laporan.view', $report->id) }}">
+                            <button type="button"
+                                class="px-5 py-2 focus:outline-none text text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                Detail
+                            </button>
+                        </a>
                     </td>
                 </tr>
                 @endforeach
@@ -65,7 +86,7 @@
         <div
             class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 uppercase border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800">
             <span class="flex items-center col-span-3">
-                Showing 21-30 of 100
+                Showing 1-10 of 50
             </span>
             <span class="col-span-2"></span>
             <!-- Pagination -->
@@ -84,7 +105,8 @@
                             </button>
                         </li>
                         <li>
-                            <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-green">
+                            <button
+                                class="px-3 py-1 text-white transition-colors duration-150 bg-green-700 border border-r-0 border-green rounded-md focus:outline-none focus:shadow-outline-green">
                                 1
                             </button>
                         </li>
@@ -94,8 +116,7 @@
                             </button>
                         </li>
                         <li>
-                            <button
-                                class="px-3 py-1 text-white transition-colors duration-150 bg-green-700 border border-r-0 border-green rounded-md focus:outline-none focus:shadow-outline-green">
+                            <button class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-green">
                                 3
                             </button>
                         </li>

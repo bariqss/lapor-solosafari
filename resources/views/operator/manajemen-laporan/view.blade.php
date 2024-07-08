@@ -1,20 +1,19 @@
-@extends('layouts.user.dashboard')
+@extends('layouts.operator.dashboard')
 
 @section('breadcrumb')
 <nav class="py-4 px-4 flex" aria-label="Breadcrumb">
     <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
         <li class="inline-flex items-center">
-            <a href="#"
-                class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
-                Dashboard
+            <a href="{{ route('manajemen-laporan.index') }}"
+                class="inline-flex items-center text-sm font-medium text-gray-400 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">
+                Operator
             </a>
         </li>
         <li>
             <div class="flex items-center">
                 <span class="mx-2 text-gray-400">/</span>
-                <span
-                    class="ms-1 text-sm font-medium text-gray-700 md:ms-2 dark:text-gray-400 dark:hover:text-white">Detail
-                    Laporan
+                <span class="ms-1 text-sm font-medium text-gray-700 md:ms-2 dark:text-gray-400 dark:hover:text-white">
+                    Detail Laporan
                 </span>
             </div>
         </li>
@@ -39,7 +38,7 @@
             </div>
             <div class="mb-4">
                 <h2 class="font-semibold">Kategori</h2>
-                <p>{{$report->category}}</p>
+                <p>{{$report->category->nama_kategori}}</p>
             </div>
             <div class="mb-4">
                 <h2 class="font-semibold">Level Kejadian</h2>
