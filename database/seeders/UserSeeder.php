@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Enums\UserRole;
 use App\Models\User;
 use Carbon\Carbon;
 use Faker\Factory as Faker;
@@ -26,16 +27,15 @@ class UserSeeder extends Seeder
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('admin123'),
             'status' => 0,
-            'role' => 'admin',
+            'role' => UserRole::ADMIN,
         ]);
         User::query()->create([
             'name' => 'Operator',
             'email' => 'operator@gmail.com',
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('operator123'),
-            'telepon' => $faker->phoneNumber,
             'status' => 0,
-            'role' => 'operator',
+            'role' => UserRole::OPERATOR,
         ]);
         User::query()->create([
             'name' => 'Petugas',
@@ -43,7 +43,7 @@ class UserSeeder extends Seeder
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('petugas123'),
             'telepon' => $faker->phoneNumber,
-            'role' => 'petugas',
+            'role' => UserRole::PETUGAS,
         ]);
         User::query()->create([
             'name' => 'User',
@@ -51,7 +51,7 @@ class UserSeeder extends Seeder
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('user123'),
             'telepon' => $faker->phoneNumber,
-            'role' => 'user',
+            'role' => UserRole::USER,
         ]);
     }
 }

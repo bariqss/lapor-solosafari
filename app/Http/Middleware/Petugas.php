@@ -14,7 +14,8 @@ class Petugas
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
-    { {
+    { 
+        {
             if (isset(auth()->user()->role)) {
                 if (auth()->user()->role == 'petugas') {
                     return $next($request);

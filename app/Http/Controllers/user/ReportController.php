@@ -23,8 +23,10 @@ class ReportController extends Controller
 
     public function riwayat()
     {
-        $report = Report::all();
-        return view('user.riwayat-laporan.index', compact('report'));
+        $reports = Report::all();
+        $categories = ReportCategory::all();
+
+        return view('user.riwayat-laporan.index', compact('reports', 'categories'));
     }
 
     public function create()
@@ -36,6 +38,7 @@ class ReportController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'judul' => 'required',
             'tanggal' => 'required',
@@ -69,7 +72,7 @@ class ReportController extends Controller
             'id_report' => $report->id,
         ]);
 
-        return redirect(route('manajemen-laporan.index'))->with('success', 'Laporan berhasil dikirim');
+        return redirect(route('user.riwayat-laporan.riwayat'))->with('success', 'Laporan berhasil dikirim');
     }
 
     public function show(string $id)

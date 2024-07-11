@@ -1,5 +1,5 @@
 @extends('layouts.user.dashboard')
-
+@section('title', 'Dashboard')
 @section('content')
 <div class="flex flex-col mt-6 mb-6 shadow-md">
     <div
@@ -10,7 +10,7 @@
             </h1>
             <p class="mb-4 text-lg text-white">Silahkan login terlebih dahulu untuk melaporkan kejadian</p>
             <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0">
-                <a href="/laporan"
+                <a href="/user/laporan/create"
                     class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-green-600 hover:bg-green-800 focus:ring-4 focus:ring-green-200">
                     Laporkan
                 </a>
@@ -24,7 +24,7 @@
         <table class="w-full whitespace-no-wrap">
             <caption
                 class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white">
-                Riwayat Kejadian
+                Daftar Riwayat Kejadian
             </caption>
             <thead>
                 <tr
@@ -72,7 +72,7 @@
                         </span>
                     </td>
                     <td class="px-4 py-3 text-xs">
-                        <a href="{{ route('laporan.view', $report->id) }}">
+                        <a href="{{ route('user.laporan.view', $report->id) }}">
                             <button type="button"
                                 class="px-5 py-2 focus:outline-none text text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm me-2 mb-2">
                                 Detail

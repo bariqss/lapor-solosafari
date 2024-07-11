@@ -68,8 +68,10 @@ class ReportCategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ReportCategory $reportCategory)
+    public function destroy(ReportCategory $id)
     {
-        //
+        ReportCategory::where('id', $id)->delete();
+
+        return redirect()->back()->with('success', 'Kategori berhasil dihapus');
     }
 }

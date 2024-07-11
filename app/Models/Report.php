@@ -34,15 +34,13 @@ class Report extends Model
         return $this->hasMany(Location::class, 'id_report');
     }
 
-    protected static function booted(): void
-    {
-        static::saving(function (Report $data) {
-            $data->date = Carbon::parse($data->tanggal);
-        });
-        static::creating(function (Report $data) {
-            $data->id_user = 1;
-            $data->id_location = 1;
-            $data->status = 1;
-        });
-    }
+    // protected static function booted(): void
+    // {
+    //     static::saving(function (Report $data) {
+    //         $data->date = Carbon::parse($data->date);
+    //     });
+    //     static::creating(function (Report $data) {
+    //         $data->status = 1;
+    //     });
+    // }
 }

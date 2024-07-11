@@ -14,7 +14,7 @@ class DashboardController extends Controller
     {
         $reports = Report::all();
 
-        return view('dashboard', compact('reports'));
+        return view('dashboard.index', compact('reports'));
     }
 
     /**

@@ -1,19 +1,18 @@
 @extends('layouts.operator.dashboard')
+@section('title', 'Manajemen-Petugas')
 
 @section('breadcrumb')
 <nav class="py-4 px-4 flex" aria-label="Breadcrumb">
     <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
         <li class="inline-flex items-center">
-            <a href="#"
-                class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
+            <a href="#" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
                 Operator
             </a>
         </li>
         <li>
             <div class="flex items-center">
                 <span class="mx-2 text-gray-400">/</span>
-                <span
-                    class="ms-1 text-sm font-medium text-gray-700 md:ms-2">Manajemen
+                <span class="ms-1 text-sm font-medium text-gray-700 md:ms-2">Manajemen
                     Petugas
                 </span>
             </div>
@@ -34,18 +33,18 @@
         <div class="w-full overflow-x-auto">
             <table class="w-full whitespace-no-wrap">
                 <thead>
-                    <tr
-                        class="text-xs font-semibold tracking-wide text-gray-500 uppercase bg-gray-50">
+                    <tr class="text-xs font-semibold tracking-wide text-gray-500 uppercase bg-gray-50">
                         <th class="px-4 py-3">No</th>
                         <th class="px-4 py-3">Nama</th>
-                        <th class="px-4 py-3">Posisi</th>
+                        <th class="px-4 py-3">Email</th>
                         <th class="px-4 py-3">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y">
+                    @foreach ($petugas as $petugas)
                     <tr class="text-gray-700">
                         <td class="px-4 py-3">
-                            1
+                            {{ $loop->iteration }}
                         </td>
                         <td class="px-4 py-3">
                             <div class="flex items-center text-sm">
@@ -57,12 +56,12 @@
                                     <div class="absolute inset-0 rounded-full shadow-inner" aria-hidden="true"></div>
                                 </div>
                                 <div>
-                                    <p class="font-medium">Jolina Angelie</p>
+                                    <p class="font-medium">{{ $petugas->name }}</p>
                                 </div>
                             </div>
                         </td>
                         <td class="px-4 py-3 text-sm">
-                            Operator 1
+                            {{ $petugas->email }}
                         </td>
                         <td class="px-4 py-3">
                             <div class="flex justify-center">
@@ -78,7 +77,8 @@
                                             d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
                                     </svg>
                                 </button>
-                                <button type="button"
+                                <button type="button" data-modal-target="popup-modal {{$petugas->id}}"
+                                    data-modal-toggle="popup-modal"
                                     class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
                                     <svg class="w-4 h-4" data-slot="icon" fill="none" stroke-width="1.5"
                                         stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
@@ -88,9 +88,58 @@
                                         </path>
                                     </svg>
                                 </button>
+
+                                <!-- Main modal konfirmasi delete -->
+                                <form action="{{ route('operator.manajemen-petugas.delete', $petugas->id) }}"
+                                    method="POST">
+                                    <div id="popup-modal {{$petugas->id}}" tabindex="-1"
+                                        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                                        <div class="relative p-4 w-full max-w-md max-h-full">
+                                            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                                                <button type="button"
+                                                    class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                                                    data-modal-hide="popup-modal">
+                                                    <svg class="w-3 h-3" aria-hidden="true"
+                                                        xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 14 14">
+                                                        <path stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="2"
+                                                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                                    </svg>
+                                                    <span class="sr-only">Close modal</span>
+                                                </button>
+                                                <div class="p-4 md:p-5 text-center">
+                                                    <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
+                                                        aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none" viewBox="0 0 20 20">
+                                                        <path stroke="currentColor" stroke-linecap="round"
+                                                            stroke-linejoin="round" stroke-width="2"
+                                                            d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                                                    </svg>
+                                                    <h3
+                                                        class="flex mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                                                        Anda yakin untuk menghapus <b>{{ $petugas->name }}</b>
+                                                        dari petugas?
+                                                    </h3>
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <input type="hidden" name="petugas_id" value="{{ $petugas->id }}">
+                                                    <button data-modal-hide="popup-modal" type="button"
+                                                        class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                                        Hapus
+                                                    </button>
+                                                    <button data-modal-hide="popup-modal" type="button"
+                                                        class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No,
+                                                        Cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>
@@ -119,35 +168,33 @@
                     </button>
                 </div>
                 <!-- Modal body -->
-                <form class="p-4 md:p-5">
+                <form class="p-4 md:p-5" action="{{ route('operator.manajemen-petugas.store') }}" method="POST">
+                    @csrf
                     <div class="grid gap-4 mb-4 grid-cols-2">
                         <div class="col-span-2">
-                            <label for="name"
-                                class="block mb-2 text-sm font-medium text-gray-900">Nama</label>
-                            <input type="text" name="nama" id="name"
+                            <label for="name" class="block mb-2 text-sm font-medium text-gray-900">Nama</label>
+                            <input type="text" name="name" id="name"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                                placeholder="Fullname" required="">
+                                placeholder="Fullname" required>
                         </div>
                         <div class="col-span-2 sm:col-span-1">
                             <label for="telp" class="block mb-2 text-sm font-medium text-gray-900">No.
                                 Telepon</label>
-                            <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" name="no_tlp" id="notlp"
+                            <input type="tel" name="telepon" id="telepon"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                                placeholder="No. Telepon" required="">
+                                placeholder="No. Telepon" required>
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="price"
-                                class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+                            <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
                             <input type="email" name="email" id="email"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                                placeholder="Email" required="">
+                                placeholder="Email" required>
                         </div>
                         <div class="col-span-2 sm:col-span-1">
-                            <label for="price"
-                                class="block mb-2 text-sm font-medium text-gray-900">Password</label>
+                            <label for="price" class="block mb-2 text-sm font-medium text-gray-900">Password</label>
                             <input type="password" name="password" id="password" placeholder="Password"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
-                                required="">
+                                required>
                         </div>
                         <div class="flex justify-end col-span-2 sm:col-span-1 ">
                             <button type="submit"

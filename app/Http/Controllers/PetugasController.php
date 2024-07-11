@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRole;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class PetugasController extends Controller
 {
@@ -12,7 +15,7 @@ class PetugasController extends Controller
      */
     public function index()
     {
-        $petugas = User::where('role', 'operator')->paginate(10);
+        $petugas = User::where('role', UserRole::PETUGAS)->paginate(10);
 
         return view('operator.manajemen-petugas.index', compact('petugas'));
     }
@@ -35,11 +38,11 @@ class PetugasController extends Controller
         ]);
 
         $user = User::create([
-            'name' => $request->fullname,
+            'name' => $request->name,
             'telepon' => $request->telepon,
             'email' => $request->email,
-            'password' => $request->password,
-            'role' => $request->role,
+            'password' => Hash::make($request->password),
+            'role' => UserRole::PETUGAS,
         ]);
 
         $user->sendEmailVerificationNotification();
@@ -74,8 +77,41 @@ class PetugasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        //
+        User::where('id', $request->petugas_id)->delete();
+
+        return redirect()->back()->with('success', 'Petugas berhasil dihapus');
+    }
+
+    public function verify(Request $request)
+    {
+        $email = $request->input('email');
+
+        $user = User::where('email', $email)->first();
+
+        if ($user && !$user->hasVerifiedEmail()) {
+            $user->email_verified_at = Carbon::now();
+            $user->save();
+
+            return back()->with('resent', 'Email verification has been successfully sent.');
+        }
+
+        return back()->with('error', 'Invalid email or email is already verified.');
+    }
+    
+    public function resendVerify(Request $request)
+    {
+        $email = $request->input('email');
+
+        $user = User::where('email', $email)->first();
+
+        if ($user && !$user->hasVerifiedEmail()) {
+            $user->sendEmailVerificationNotification();
+
+            return back()->with('resent', 'Email verification has been successfully sent.');
+        }
+
+        return back()->with('error', 'Invalid email or email is already verified.');
     }
 }

@@ -1,4 +1,5 @@
 @extends('layouts.user.dashboard')
+@section('title', 'Laporkan-Kejadian')
 
 @section('content')
 
@@ -6,7 +7,7 @@
     <div class="flex justify-center">
         <h2 class="mb-4 text-xl font-bold text-gray-900">Laporkan Kejadian</h2>
     </div>
-    <form action="{{ route('laporan.create.post') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('user.laporan.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
             <div class="sm:col-span-2">
@@ -21,8 +22,8 @@
                     Kejadian</label>
                 <div class="relative max-w">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 20 20">
                             <path
                                 d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                         </svg>
@@ -45,8 +46,7 @@
                 </select>
             </div>
             <div>
-                <label for="category"
-                    class="block mb-2 text-sm font-medium text-gray-900">Kategori</label>
+                <label for="category" class="block mb-2 text-sm font-medium text-gray-900">Kategori</label>
                 <select id="category" name="kategori"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5">
                     <option selected="">Pilih Kategori</option>
@@ -83,8 +83,8 @@
                 <label for="dropzone-file"
                     class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
                     <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                        <svg class="w-8 h-8 mb-4 text-gray-500" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
+                        <svg class="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="none" viewBox="0 0 20 16">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                         </svg>
@@ -98,8 +98,7 @@
                 </label>
             </div>
             <div class="sm:col-span-2">
-                <label for="description"
-                    class="block mb-2 text-sm font-medium text-gray-900">Description</label>
+                <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
                 <textarea id="description" name="deskripsi" rows="8"
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-green-500 focus:border-green-500"
                     placeholder="Your description here"></textarea>
