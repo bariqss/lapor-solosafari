@@ -8,7 +8,7 @@
         </div>
         <ul class="mt-6">
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black group"
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-green-700 hover:text-grey-50 group {{ request()->routeIs('user.laporan.index') ? 'bg-green-700 font-semibold text-gray-100' : '' }}"
                     href="{{ route('user.laporan.index') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -22,7 +22,7 @@
         </ul>
         <ul>
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black group"
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-green-700 hover:text-grey-50 group {{ request()->routeIs('user.laporan.create') ? 'bg-green-700 font-semibold text-gray-100' : '' }}"
                     href="{{ route('user.laporan.create') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -34,7 +34,7 @@
                 </a>
             </li>
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black group"
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-green-700 hover:text-grey-50 group {{ request()->routeIs('user.riwayat-laporan.riwayat') ? 'bg-green-700 font-semibold text-gray-100' : '' }}"
                     href="{{ route('user.riwayat-laporan.riwayat') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -68,7 +68,7 @@
         </div>
         <ul class="mt-6">
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black group"
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black group {{ request()->routeIs('user.laporan.index') ? 'bg-green-700 font-semibold text-gray-100' : '' }}"
                     href="{{ route('user.laporan.index') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -82,7 +82,7 @@
         </ul>
         <ul>
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black group"
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black group {{ request()->routeIs('user.laporan.create') ? 'bg-green-700 font-semibold text-gray-100' : '' }}"
                     href="{{ route('user.laporan.create') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -94,7 +94,7 @@
                 </a>
             </li>
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black group"
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg text-white hover:bg-gray-100 hover:text-black group {{ request()->routeIs('user.riwayat-laporan.riwayat') ? 'bg-green-700 font-semibold text-gray-100' : '' }}"
                     href="{{ route('user.riwayat-laporan.riwayat') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">

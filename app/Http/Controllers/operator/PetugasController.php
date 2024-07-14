@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\operator;
 
 use App\Enums\UserRole;
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+
 
 class PetugasController extends Controller
 {
@@ -15,9 +17,9 @@ class PetugasController extends Controller
      */
     public function index()
     {
-        $petugas = User::where('role', UserRole::PETUGAS)->paginate(10);
+        $all_petugas = User::where('role', UserRole::PETUGAS)->paginate(10);
 
-        return view('operator.manajemen-petugas.index', compact('petugas'));
+        return view('operator.manajemen-petugas.index', compact('all_petugas'));
     }
 
     /**
@@ -99,7 +101,7 @@ class PetugasController extends Controller
 
         return back()->with('error', 'Invalid email or email is already verified.');
     }
-    
+
     public function resendVerify(Request $request)
     {
         $email = $request->input('email');

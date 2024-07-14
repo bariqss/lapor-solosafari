@@ -3,10 +3,10 @@
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\operator\PetugasController;
 use App\Http\Controllers\operator\ReportController as OperatorReportController;
 use App\Http\Controllers\user\ReportController as UserReportController;
 use App\Http\Controllers\PelaporanController;
-use App\Http\Controllers\PetugasController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportCategoryController;
 use Illuminate\Support\Facades\Route;

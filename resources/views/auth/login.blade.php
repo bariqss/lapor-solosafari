@@ -14,23 +14,25 @@
             <div class="mb-2">
                 <input type="email" name="email" id="email"
                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Email" required="">
+                    placeholder="Email" required autofocus autocomplete="username">
+                <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
             <div class="mb-4">
                 <input type="password" name="password" id="password" placeholder="Password"
                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required="">
+                    required autocomplete="current-password">
+                <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
             <button type="submit"
                 class="mb-4 px-6 py-3.5 w-full text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-semibold rounded-lg text-sm text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                 Login
             </button>
         </form>
-        
+
         <div class="flex mb-4 justify-end">
-            <a href="" class="text-sm">Forgot Password?</a>
+            <a href="{{ route('password.request') }}" class="text-sm">Forgot Password?</a>
         </div>
-        
+
         <a href="/auth/google">
             <button type="button"
                 class="w-full mb-4 text-green-500 bg-white hover:text-white border-2 border-green-600 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex justify-center items-center me-2">

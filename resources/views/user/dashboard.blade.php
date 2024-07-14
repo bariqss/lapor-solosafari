@@ -48,7 +48,7 @@
                         </div>
                     </td>
                     <td class="px-4 py-3 text-sm">
-                        {{$report->date}}
+                        {{Carbon\Carbon::parse($report->date)->format("d/m/Y")}}
                     </td>
                     <td class="px-4 py-3 text-sm">
                         {{$report->category->nama_kategori}}

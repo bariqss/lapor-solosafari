@@ -4,16 +4,14 @@
 <nav class="py-4 px-4 flex" aria-label="Breadcrumb">
     <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
         <li class="inline-flex items-center">
-            <a href="#"
-                class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
+            <a href="#" class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
                 Dashboard
             </a>
         </li>
         <li>
             <div class="flex items-center">
                 <span class="mx-2 text-gray-400">/</span>
-                <span
-                    class="ms-1 text-sm font-medium text-gray-700 md:ms-2">Update
+                <span class="ms-1 text-sm font-medium text-gray-700 md:ms-2">Update
                     Laporan
                 </span>
             </div>
@@ -41,8 +39,8 @@
                     Kejadian</label>
                 <div class="relative max-w">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <svg class="w-4 h-4 text-gray-500" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <svg class="w-4 h-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 20 20">
                             <path
                                 d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                         </svg>
@@ -54,8 +52,7 @@
                 </div>
             </div>
             <div>
-                <label for="category"
-                    class="block mb-2 text-sm font-medium text-gray-900">Kategori</label>
+                <label for="category" class="block mb-2 text-sm font-medium text-gray-900">Kategori</label>
                 <select id="category" name="kategori"
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
                     <option selected>Pilih Kategori</option>
@@ -76,8 +73,7 @@
                     <span
                         class="bg-yellow-100 text-yellow-800 text-sm font-medium me-2 px-3 py-2 rounded-full">Sedang</span>
                     @else
-                    <span
-                        class="bg-red-100 text-red-800 text-sm font-medium me-2 px-3 py-2 rounded-full">Tinggi</span>
+                    <span class="bg-red-100 text-red-800 text-sm font-medium me-2 px-3 py-2 rounded-full">Tinggi</span>
                     @endif
                 </div>
                 {{-- <select id="level" name="level"
@@ -114,8 +110,7 @@
                 </div>
             </div>
             <div class="sm:col-span-2">
-                <label for="description"
-                    class="block mb-2 text-sm font-medium text-gray-900">Deskripsi</label>
+                <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Deskripsi</label>
                 <textarea id="description" name="deskripsi" rows="8" readonly
                     class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-purple-500 focus:border-purple-500"> {{ $report->description }} </textarea>
             </div>
@@ -126,6 +121,7 @@
         <h1 class="text-lg font-bold">Tindak Lanjut Laporan</h1>
         <div class="mt-4">
             <form action="{{ route('manajemen-laporan.update', $report->id) }}" method="POST"
+                @csrf
                 enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="validasi" class="block mb-2 text-sm font-medium text-gray-900">
@@ -136,6 +132,17 @@
                         <option selected>Pilih Status Laporan</option>
                         <option value="V">Valid</option>
                         <option value="TV">Tidak Valid</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="level" class="block mb-2 text-sm font-medium text-gray-900">Level
+                        Kejadian</label>
+                    <select id="level" name="level"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5">
+                        <option selected="">Pilih Level</option>
+                        <option value="1">Rendah</option>
+                        <option value="2">Sedang</option>
+                        <option value="3">Tinggi</option>
                     </select>
                 </div>
                 <div>

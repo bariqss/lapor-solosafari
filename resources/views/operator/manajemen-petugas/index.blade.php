@@ -37,11 +37,12 @@
                         <th class="px-4 py-3">No</th>
                         <th class="px-4 py-3">Nama</th>
                         <th class="px-4 py-3">Email</th>
+                        <th class="px-4 py-3">Status</th>
                         <th class="px-4 py-3">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y">
-                    @foreach ($petugas as $petugas)
+                    @foreach ($all_petugas as $petugas)
                     <tr class="text-gray-700">
                         <td class="px-4 py-3">
                             {{ $loop->iteration }}
@@ -63,6 +64,15 @@
                         <td class="px-4 py-3 text-sm">
                             {{ $petugas->email }}
                         </td>
+                        <td class="px-4 py-3 text-center text-sm">
+                            @if ($petugas->email_verified_at != null)
+                            <span
+                                class="bg-blue-100 text-blue-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">Verivied</span>
+                            @else
+                            <span
+                                class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">Unverivied</span>
+                            @endif
+                        </td>
                         <td class="px-4 py-3">
                             <div class="flex justify-center">
                                 <button type="button"
@@ -77,7 +87,7 @@
                                             d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
                                     </svg>
                                 </button>
-                                <button type="button" data-modal-target="popup-modal {{$petugas->id}}"
+                                <button type="button" data-modal-target="popup-modal{{$petugas->id}}"
                                     data-modal-toggle="popup-modal"
                                     class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
                                     <svg class="w-4 h-4" data-slot="icon" fill="none" stroke-width="1.5"
@@ -92,7 +102,7 @@
                                 <!-- Main modal konfirmasi delete -->
                                 <form action="{{ route('operator.manajemen-petugas.delete', $petugas->id) }}"
                                     method="POST">
-                                    <div id="popup-modal {{$petugas->id}}" tabindex="-1"
+                                    <div id="popup-modal{{$petugas->id}}" tabindex="-1"
                                         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                                         <div class="relative p-4 w-full max-w-md max-h-full">
                                             <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -142,6 +152,9 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="">
+                {{ $all_petugas->links('pagination::default') }}
+            </div>
         </div>
     </div>
 

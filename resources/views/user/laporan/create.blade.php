@@ -29,21 +29,11 @@
                         </svg>
                     </div>
                     <input datepicker datepicker-buttons datepicker-autoselect-today datepicker-autohide
-                        datepicker-orientation="bottom right" datepicker-format="dd/mm/yyyy" type="text" name="tanggal"
+                        datepicker-orientation="bottom right" datepicker-format="dd/mm/yyyy" type="text" id="tanggal"
+                        name="tanggal"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full ps-10 p-2.5"
                         placeholder="Select date">
                 </div>
-            </div>
-            <div>
-                <label for="level" class="block mb-2 text-sm font-medium text-gray-900">Level
-                    Kejadian</label>
-                <select id="level" name="level"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5">
-                    <option selected="">Pilih Level</option>
-                    <option value="1">Rendah</option>
-                    <option value="2">Sedang</option>
-                    <option value="3">Tinggi</option>
-                </select>
             </div>
             <div>
                 <label for="category" class="block mb-2 text-sm font-medium text-gray-900">Kategori</label>
@@ -77,25 +67,28 @@
                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5"
                     placeholder="longitude" value="" required="">
             </div>
-            <div class="flex flex-col justify-center w-full">
+
+            <div id="image-upload-container" class="flex flex-col justify-center w-full">
                 <label for="category" class="block mb-2 text-sm font-medium text-gray-900">Upload
                     Dokumentasi</label>
                 <label for="dropzone-file"
-                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 ">
                     <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                        <svg class="w-8 h-8 mb-4 text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="none" viewBox="0 0 20 16">
+                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
                         </svg>
-                        <p class="mb-2 text-sm text-gray-500"><span class="font-semibold">Click
-                                to upload</span>
-                            or drag and drop</p>
-                        <p class="text-xs text-gray-500">SVG, PNG, JPG or GIF (MAX. 800x400px)
-                        </p>
+                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to
+                                upload</span> or
+                            drag and drop</p>
+                        <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
                     </div>
-                    <input id="dropzone-file" accept="image/*" name="gambar" type="file" class="hidden" />
+                    <input id="dropzone-file" type="file" class="hidden" accept="image/*" />
                 </label>
+            </div>
+            <div class="w-full mb-4">
+                <img id="uploaded-image" class="hidden w-full h-64 object-cover rounded-lg" />
             </div>
             <div class="sm:col-span-2">
                 <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
@@ -120,7 +113,7 @@
 function getLocation() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(showPosition);
-  } else { 
+  } else {
     x.innerHTML = "Geolocation is not supported by this browser.";
   }
 }
@@ -131,53 +124,21 @@ function showPosition(position) {
 }
 </script>
 
-{{-- <script>
-    document.getElementById('getLocationBtn').addEventListener('click', function() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(sendLocation, handleError);
-            } else {
-                alert("Geolocation is not supported by this browser.");
+<script>
+    document.getElementById('dropzone-file').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const container = document.getElementById('image-upload-container');
+                    container.innerHTML = `<img src="${e.target.result}" class="w-full h-64 object-cover rounded-lg" />`;
+                }
+                reader.readAsDataURL(file);
             }
         });
 
-        function sendLocation(position) {
-            const csrfToken = document.querySelector('input[name="_token"]').value;
-            const latitude = position.coords.latitude;
-            const longitude = position.coords.longitude;
-
-            fetch('/laporan/getlocation', {
-                method: 'POST',
-                headers: {
-                'Content-Type': 'application/json',
-                'X-CSRF-TOKEN': csrfToken,
-                },
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert(data.message);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred: ' + error.message);
-            });
-        }
-
-        function handleError(error) {
-            console.error('Geolocation error:', error);
-            switch(error.code) {
-                case error.PERMISSION_DENIED:
-                    alert("User denied the request for Geolocation.");
-                    break;
-                case error.POSITION_UNAVAILABLE:
-                    alert("Location information is unavailable.");
-                    break;
-                case error.TIMEOUT:
-                    alert("The request to get user location timed out.");
-                    break;
-                case error.UNKNOWN_ERROR:
-                    alert("An unknown error occurred.");
-                    break;
-            }
-        }
-</script> --}}
+    const dateInput = document.getElementById('tanggal');
+    const today = new Date().toISOString().split('T')[20];
+    dateInput.value = today;
+</script>
 @endsection

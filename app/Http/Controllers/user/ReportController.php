@@ -7,7 +7,9 @@ use App\Models\Image;
 use App\Models\Location;
 use App\Models\Report;
 use App\Models\ReportCategory;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReportController extends Controller
 {
@@ -41,6 +43,7 @@ class ReportController extends Controller
         // dd($request->all());
         $request->validate([
             'judul' => 'required',
+            'id_user' => 'required',
             'tanggal' => 'required',
             'kategori' => 'required',
             'level' => 'required',
@@ -60,12 +63,16 @@ class ReportController extends Controller
 
         $report = Report::create([
             'name' => $request->judul,
+            'id_user' => Auth::user()->id,
             'date' => $request->tanggal,
             'id_category' => $request->kategori,
             'level' => $request->level,
             'id_location' => $location->id,
             'description' => $request->deskripsi,
         ]);
+
+        // dd($report);
+
 
         Image::create([
             'name_image' => $fileName,
