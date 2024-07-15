@@ -38,6 +38,7 @@
                         <th class="px-4 py-3">Nama</th>
                         <th class="px-4 py-3">Email</th>
                         <th class="px-4 py-3">Status</th>
+                        <th class="px-4 py-3"></th>
                         <th class="px-4 py-3">Aksi</th>
                     </tr>
                 </thead>
@@ -73,6 +74,30 @@
                                 class="bg-yellow-100 text-yellow-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">Unverivied</span>
                             @endif
                         </td>
+                        <td class="text-center">
+                            <div class="d-flex justify-center items-center gap-2">
+                                @if ($petugas->email_verified_at == null)
+                                <form action="{{ route('operator.manajemen-petugas.resend') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="email" value="{{ $petugas->email }}">
+                                    <button type="submit"
+                                        class="px-3 py-1 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                        Kirim
+                                        ulang link
+                                        verifikasi
+                                    </button>
+                                </form>
+                                <form action="{{ route('operator.manajemen-petugas.verify') }}" method="post">
+                                    @csrf
+                                    <input type="hidden" name="email" value="{{ $petugas->email }}">
+                                    <button type="submit"
+                                        class="px-3 py-1 text-xs font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                        Verifikasi Sekarang
+                                    </button>
+                                </form>
+                                @endif
+                            </div>
+                        </td>
                         <td class="px-4 py-3">
                             <div class="flex justify-center">
                                 <button type="button"
@@ -88,7 +113,7 @@
                                     </svg>
                                 </button>
                                 <button type="button" data-modal-target="popup-modal{{$petugas->id}}"
-                                    data-modal-toggle="popup-modal"
+                                    data-modal-toggle="popup-modal{{$petugas->id}}"
                                     class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
                                     <svg class="w-4 h-4" data-slot="icon" fill="none" stroke-width="1.5"
                                         stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
@@ -127,14 +152,14 @@
                                                             d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                                     </svg>
                                                     <h3
-                                                        class="flex mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                                                        class=" mb-5 text-lg text-wrap font-normal text-gray-500 dark:text-gray-400">
                                                         Anda yakin untuk menghapus <b>{{ $petugas->name }}</b>
                                                         dari petugas?
                                                     </h3>
                                                     @csrf
                                                     @method('DELETE')
                                                     <input type="hidden" name="petugas_id" value="{{ $petugas->id }}">
-                                                    <button data-modal-hide="popup-modal" type="button"
+                                                    <button data-modal-hide="popup-modal" type="submit"
                                                         class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                                         Hapus
                                                     </button>
@@ -152,7 +177,7 @@
                     @endforeach
                 </tbody>
             </table>
-            <div class="">
+            <div>
                 {{ $all_petugas->links('pagination::default') }}
             </div>
         </div>

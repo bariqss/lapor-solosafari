@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Location;
 use App\Models\Report;
 use App\Models\ReportCategory;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,7 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $reports = Report::all();
+        $reports = Report::paginate(15);
 
         return view('operator.manajemen-laporan.index', compact('reports'));
     }
@@ -34,7 +35,13 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'level' => 'required',
+        ]);
+
+        $report = Report::create([
+            'level' => $request->level,
+        ]);
     }
 
     /**
@@ -42,9 +49,11 @@ class ReportController extends Controller
      */
     public function show(string $id)
     {
+        $location = Location::where('id', $id)->firstOrFail();
+        $categories = ReportCategory::all();
         $report = Report::where('id', $id)->firstOrFail();
 
-        return view('operator.manajemen-laporan.view', compact('report', 'location'));
+        return view('operator.manajemen-laporan.view', compact('report', 'location', 'categories'));
     }
     /**
      * Show the form for editing the specified resource.
@@ -63,24 +72,14 @@ class ReportController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        Report::where('id', $id)->update([
-            'name' => $request->judul,
-            'date' => $request->tanggal,
-            'id_category' => $request->kategori,
-            'level' => $request->level,
-            'id_location' => $request->lokasi,
-            'description' => $request->deskripsi,
-        ]);
-
-        return redirect(route('manajemen-laporan.index'))->with('success', 'Laporan berhasil diupdate');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request)
     {
-        Report::where('id', $id)->delete();
+        Report::where('id', $request->report_id)->delete();
 
         return redirect()->back()->with('success', 'Laporan berhasil dihapus');
     }

@@ -18,14 +18,14 @@ class ReportController extends Controller
      */
     public function index()
     {
-        $reports = Report::all();
+        $reports = Report::paginate(10);
 
         return view('user.dashboard', compact('reports'));
     }
 
     public function riwayat()
     {
-        $reports = Report::all();
+        $reports = Report::paginate(10);
         $categories = ReportCategory::all();
 
         return view('user.riwayat-laporan.index', compact('reports', 'categories'));
@@ -40,19 +40,21 @@ class ReportController extends Controller
 
     public function store(Request $request)
     {
+        $user = Auth::user();
+        // dd($user);
         // dd($request->all());
+
         $request->validate([
             'judul' => 'required',
-            'id_user' => 'required',
             'tanggal' => 'required',
             'kategori' => 'required',
-            'level' => 'required',
             'latitude' => 'required',
             'longitude' => 'required',
             'deskripsi' => 'required',
-            'gambar' => 'required|max:1024',
+            'gambar' => 'required',
         ]);
 
+        // dd($request);
         $fileName = time() . '.' . $request->gambar->extension();
         $request->gambar->move(public_path('assets/images'), $fileName);
 
@@ -60,33 +62,34 @@ class ReportController extends Controller
             'latitude' => $request['latitude'],
             'longitude' => $request['longitude'],
         ]);
+        // dd($location);
 
         $report = Report::create([
+            'id_user' => $user->id,
             'name' => $request->judul,
-            'id_user' => Auth::user()->id,
             'date' => $request->tanggal,
             'id_category' => $request->kategori,
-            'level' => $request->level,
             'id_location' => $location->id,
             'description' => $request->deskripsi,
         ]);
 
         // dd($report);
 
-
         Image::create([
             'name_image' => $fileName,
             'id_report' => $report->id,
         ]);
+        // dd($report);
 
         return redirect(route('user.riwayat-laporan.riwayat'))->with('success', 'Laporan berhasil dikirim');
     }
 
-    public function show(string $id)
+    public function view($id)
     {
         $location = Location::where('id', $id)->firstOrFail();
         $categories = ReportCategory::all();
         $report = Report::where('id', $id)->firstOrFail();
+        
         return view('user.laporan.view', compact('report', 'categories', 'location'));
     }
 }

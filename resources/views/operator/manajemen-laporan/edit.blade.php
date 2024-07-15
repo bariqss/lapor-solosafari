@@ -120,7 +120,7 @@
     <div class="w-80 flex flex-col p-6 col-span-2 rounded-lg shadow-md bg-white">
         <h1 class="text-lg font-bold">Tindak Lanjut Laporan</h1>
         <div class="mt-4">
-            <form action="{{ route('manajemen-laporan.update', $report->id) }}" method="POST"
+            <form action="{{ route('operator.manajemen-laporan.update', $report->id) }}" method="POST"
                 @csrf
                 enctype="multipart/form-data">
                 <div class="mb-3">

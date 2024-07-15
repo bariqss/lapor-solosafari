@@ -4,7 +4,7 @@
 <nav class="py-4 px-4 flex" aria-label="Breadcrumb">
     <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
         <li class="inline-flex items-center">
-            <a href="{{ route('laporan.index') }}"
+            <a href="{{ route('user.laporan.index') }}"
                 class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
                 Dashboard
             </a>

@@ -7,7 +7,7 @@
         </div>
         <ul class="mt-6">
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 group"
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 group {{ request()->routeIs('admin.dashboard') ? 'bg-gray-100 font-semibold text-green-500' : '' }}"
                     href="{{ route('admin.dashboard') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -21,7 +21,7 @@
         </ul>
         <ul>
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 group"
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 group {{ request()->routeIs('admin.manajemen-pelaporan.index') ? 'bg-gray-100 font-semibold text-green-500' : '' }}"
                     href="{{ route('admin.manajemen-pelaporan.index') }}">
                     <svg class="w-5 h-5" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
@@ -33,7 +33,7 @@
                 </a>
             </li>
             <li class="relative px-6 py-2">
-                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 group"
+                <a class="inline-flex p-2 items-center w-full text-sm font-medium transition-colors duration-150 rounded-lg hover:bg-gray-100 hover:text-green-500 group {{ request()->routeIs('admin.manajemen-role.index') ? 'bg-gray-100 font-semibold text-green-500' : '' }}"
                     {{-- href="{{ route('manajemen-role.index') }}"> --}}
                     <svg class="w-5 h-5" data-slot="icon" fill="none" stroke-width="1.5" stroke="currentColor"
                         viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">

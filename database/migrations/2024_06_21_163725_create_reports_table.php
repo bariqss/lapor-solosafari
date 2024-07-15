@@ -19,8 +19,8 @@ return new class extends Migration
             $table->unsignedBigInteger('id_location');
             $table->unsignedBigInteger('id_category');
             $table->text('description');
-            $table->string('level');
-            $table->string('status');
+            $table->string('level')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

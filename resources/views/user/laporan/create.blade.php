@@ -28,11 +28,12 @@
                                 d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
                         </svg>
                     </div>
-                    <input datepicker datepicker-buttons datepicker-autoselect-today datepicker-autohide
+                    {{-- <input datepicker datepicker-buttons datepicker-autoselect-today datepicker-autohide
                         datepicker-orientation="bottom right" datepicker-format="dd/mm/yyyy" type="text" id="tanggal"
                         name="tanggal"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full ps-10 p-2.5"
-                        placeholder="Select date">
+                        placeholder="Select date"> --}}
+                        <input type="date" name="tanggal">
                 </div>
             </div>
             <div>
@@ -71,25 +72,13 @@
             <div id="image-upload-container" class="flex flex-col justify-center w-full">
                 <label for="category" class="block mb-2 text-sm font-medium text-gray-900">Upload
                     Dokumentasi</label>
-                <label for="dropzone-file"
-                    class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 ">
-                    <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                        <svg class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 16">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
-                        </svg>
-                        <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to
-                                upload</span> or
-                            drag and drop</p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-                    </div>
-                    <input id="dropzone-file" type="file" class="hidden" accept="image/*" />
-                </label>
+                <input
+                    class="block w-full mb-5 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                    id="gambar" name="gambar" type="file">
             </div>
-            <div class="w-full mb-4">
+            {{-- <div class="w-full mb-4">
                 <img id="uploaded-image" class="hidden w-full h-64 object-cover rounded-lg" />
-            </div>
+            </div> --}}
             <div class="sm:col-span-2">
                 <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
                 <textarea id="description" name="deskripsi" rows="8"
@@ -125,20 +114,20 @@ function showPosition(position) {
 </script>
 
 <script>
-    document.getElementById('dropzone-file').addEventListener('change', function(event) {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const container = document.getElementById('image-upload-container');
-                    container.innerHTML = `<img src="${e.target.result}" class="w-full h-64 object-cover rounded-lg" />`;
-                }
-                reader.readAsDataURL(file);
-            }
-        });
+    // document.getElementById('gambar').addEventListener('change', function(event) {
+    //         const file = event.target.files[0];
+    //         if (file) {
+    //             const reader = new FileReader();
+    //             reader.onload = function(e) {
+    //                 const container = document.getElementById('image-upload-container');
+    //                 container.innerHTML = `<img src="${e.target.result}" class="w-full h-64 object-cover rounded-lg" />`;
+    //             }
+    //             reader.readAsDataURL(file);
+    //         }
+    //     });
 
-    const dateInput = document.getElementById('tanggal');
-    const today = new Date().toISOString().split('T')[20];
-    dateInput.value = today;
+    // const dateInput = document.getElementById('tanggal');
+    // const today = new Date().toISOString().split('T')[20];
+    // dateInput.value = today;
 </script>
 @endsection

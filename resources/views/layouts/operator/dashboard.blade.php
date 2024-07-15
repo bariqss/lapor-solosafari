@@ -182,16 +182,6 @@
             }
     </script>
 
-     <script>
-        $('document').ready(function() {
-            $('.nav-link.active .icon i').addClass('text-white');
-            $('a.nav-link div.icon i').addClass('text-dark');
-            setTimeout(() => {
-                $('.alert-notification').remove();
-            }, 3000);
-        })
-    </script>
-
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="{{ asset('assets/js/init-alpine.js') }}"></script>
 

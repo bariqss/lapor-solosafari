@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRole;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -27,7 +28,8 @@ class GoogleController extends Controller
                 'name' => $user->name,
                 'email' => $user->email,
                 'google_id' => $user->id,
-                'password' => encrypt('my-google')
+                'password' => encrypt('my-google'),
+                'role' => UserRole::USER,
             ]);
 
             Auth::login($newUser);
