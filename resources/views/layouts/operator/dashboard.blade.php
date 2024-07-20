@@ -17,6 +17,9 @@
     <link rel="stylesheet" href="{{ asset('assets/css/tailwind.output.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/tailwind.css') }}" />
 
+    {{-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.0/css/dataTables.tailwindcss.css"> --}}
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -31,9 +34,9 @@
 
         <div class="flex flex-col flex-1 w-full">
             <header class="z-10 py-4 bg-white shadow-md">
-                <div class="container flex items-center justify-between h-full px-6 mx-auto text-purple-600">
+                <div class="container flex items-center justify-between h-full px-6 mx-auto text-blue-600">
                     <!-- Mobile hamburger -->
-                    <button class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-purple"
+                    <button class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-blue"
                         @click="toggleSideMenu" aria-label="Menu">
                         <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd"
@@ -43,7 +46,7 @@
                     </button>
                     <!-- Search input -->
                     <div class="flex justify-center flex-1 lg:mr-32">
-                        <div class="relative w-full max-w-xl mr-6 focus-within:text-purple-500">
+                        <div class="relative w-full max-w-xl mr-6 focus-within:text-blue-500">
                             <div class="absolute inset-y-0 flex items-center pl-2"></div>
                         </div>
                     </div>
@@ -52,7 +55,7 @@
                         <!-- Notifications menu -->
                         <li class="relative">
                             <button
-                                class="relative align-middle rounded-md focus:outline-none focus:shadow-outline-purple"
+                                class="relative align-middle rounded-md focus:outline-none focus:shadow-outline-blue"
                                 @click="toggleNotificationsMenu" @keydown.escape="closeNotificationsMenu"
                                 aria-label="Notifications" aria-haspopup="true">
                                 <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20">
@@ -100,7 +103,7 @@
                         </li>
                         <!-- Profile menu -->
                         <li class="relative">
-                            <button class="align-middle rounded-full focus:shadow-outline-purple focus:outline-none"
+                            <button class="align-middle rounded-full focus:shadow-outline-blue focus:outline-none"
                                 @click="toggleProfileMenu" @keydown.escape="closeProfileMenu" aria-label="Account"
                                 aria-haspopup="true">
                                 <img class="object-cover w-8 h-8 rounded-full"

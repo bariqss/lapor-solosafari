@@ -30,7 +30,7 @@
     <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
         <!-- Card -->
         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs">
-            <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full">
+            <div class="p-3 mr-4 text-blue-500 bg-blue-100 rounded-full">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd"
                         d="M4 4a2 2 0 00-2 2v4a2 2 0 002 2V6h10a2 2 0 00-2-2H4zm2 6a2 2 0 012-2h8a2 2 0 012 2v4a2 2 0 01-2 2H8a2 2 0 01-2-2v-4zm6 4a2 2 0 100-4 2 2 0 000 4z"
@@ -42,13 +42,13 @@
                     Laporan Masuk
                 </p>
                 <p class="text-lg font-semibold text-gray-700">
-                    5
+                    {{ $laporanMasuk }}
                 </p>
             </div>
         </div>
         <!-- Card -->
         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs">
-            <div class="p-3 mr-4 text-purple-500 bg-purple-100 rounded-full">
+            <div class="p-3 mr-4 text-yellow-500 bg-yellow-100 rounded-full">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                     <path
                         d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z">
@@ -60,13 +60,13 @@
                     Laporan Ditangani
                 </p>
                 <p class="text-lg font-semibold text-gray-700">
-                    50
+                    {{ $laporanDitangani }}
                 </p>
             </div>
         </div>
         <!-- Card -->
         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs">
-            <div class="p-3 mr-4 text-purple-500 bg-purple-100 rounded-full">
+            <div class="p-3 mr-4 text-green-500 bg-green-100 rounded-full">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                     <path
                         d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z">
@@ -78,13 +78,13 @@
                     Laporan Tertangani
                 </p>
                 <p class="text-lg font-semibold text-gray-700">
-                    50
+                    {{ $laporanTertangani }}
                 </p>
             </div>
         </div>
         <!-- Card -->
         <div class="flex items-center p-4 bg-white rounded-lg shadow-xs">
-            <div class="p-3 mr-4 text-teal-500 bg-teal-100 rounded-full">
+            <div class="p-3 mr-4 text-red-500 bg-red-100 rounded-full">
                 <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                     <path fill-rule="evenodd"
                         d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z"
@@ -96,7 +96,7 @@
                     Laporan Ditolak
                 </p>
                 <p class="text-lg font-semibold text-gray-700">
-                    35
+                    {{ $laporanDitolak }}
                 </p>
             </div>
         </div>
@@ -113,8 +113,19 @@
                     <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase bg-gray-50">
                         <th class="px-4 py-3">Judul Laporan</th>
                         <th class="px-4 py-3">Tanggal</th>
-                        <th class="px-4 py-3">Kategori</th>
+                        <th class="px-4 py-3">
+                            <div scope="col" class="flex items-center">
+                                Kategori
+                                <a href="#">
+                                    <svg class="w-3 h-3 ms-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 24 24">
+                                        <path
+                                            d="M8.574 11.024h6.852a2.075 2.075 0 0 0 1.847-1.086 1.9 1.9 0 0 0-.11-1.986L13.736 2.9a2.122 2.122 0 0 0-3.472 0L6.837 7.952a1.9 1.9 0 0 0-.11 1.986 2.074 2.074 0 0 0 1.847 1.086Zm6.852 1.952H8.574a2.072 2.072 0 0 0-1.847 1.087 1.9 1.9 0 0 0 .11 1.985l3.426 5.05a2.123 2.123 0 0 0 3.472 0l3.427-5.05a1.9 1.9 0 0 0 .11-1.985 2.074 2.074 0 0 0-1.846-1.087Z" />
+                                    </svg></a>
+                            </div>
+                        </th>
                         <th class="px-4 py-3">Level Kejadian</th>
+                        <th class="px-4 py-3">Status Penanganan</th>
                         <th class="px-4 py-3"></th>
                     </tr>
                 </thead>
@@ -129,13 +140,16 @@
                             </div>
                         </td>
                         <td class="px-4 py-3 text-sm">
-                            {{$report->date}}
+                            {{ \Carbon\Carbon::parse($report->date)->translatedFormat('d F Y') }}
                         </td>
                         <td class="px-4 py-3 text-sm">
                             {{ $report->category->nama_kategori }}
                         </td>
                         <td class="px-4 py-3 text-xs">
-                            @if ($report->level == 1)
+                            @if ($report->level == null)
+                            <span
+                                class="bg-gray-100 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-full">-</span>
+                            @elseif ($report->level == 1)
                             <span
                                 class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">Rendah</span>
                             @elseif($report->level == 2)
@@ -147,10 +161,27 @@
                             @endif
                         </td>
                         <td class="px-4 py-3 text-xs">
+                            @if ($report->status == null)
+                            <span
+                                class="bg-gray-100 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-full">-</span>
+                            @elseif ($report->status == 1)
+                            <span
+                                class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-md">Belum
+                                Ditangani</span>
+                            @elseif($report->status == 2)
+                            <span
+                                class="bg-yellow-50 text-yellow-800  text-xs font-medium me-2 px-2.5 py-0.5 rounded-md">Proses
+                                Penanganan</span>
+                            @else
+                            <span
+                                class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-md">Selesai</span>
+                            @endif
+                        </td>
+                        <td class="px-4 py-3 text-xs">
                             <div class="flex">
                                 <a href="{{ route('operator.manajemen-laporan.view', $report->id) }}">
                                     <button type="button"
-                                        class="text-white bg-yellow-400 hover:bg-yellow-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
+                                        class="text-white bg-blue-600 hover:bg-blue-400 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
                                         <svg class="w-4 h-4" data-slot="icon" fill="none" stroke-width="1.5"
                                             stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
                                             aria-hidden="true">
@@ -159,6 +190,18 @@
                                             </path>
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"></path>
+                                        </svg>
+                                    </button>
+                                </a>
+                                <a href="{{ route('operator.manajemen-laporan.edit', $report->id) }}">
+                                    <button type="button"
+                                        class="text-white bg-yellow-400 hover:bg-yellow-600 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm p-2.5 text-center inline-flex items-center me-2">
+                                        <svg class="w-4 h-4" data-slot="icon" fill="none" stroke-width="1.5"
+                                            stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                                            aria-hidden="true">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125">
+                                            </path>
                                         </svg>
                                     </button>
                                 </a>
@@ -232,3 +275,16 @@
     </div>
 </div>
 @endsection
+
+{{-- @push('script')
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
+
+<script src="https://cdn.datatables.net/2.1.0/js/dataTables.tailwindcss.js"></script>
+
+<script>
+    $(document).ready(function() {
+            $('table').DataTable();
+        });
+</script>
+@endpush --}}

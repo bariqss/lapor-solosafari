@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\OperatorController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\operator\PetugasController;
 use App\Http\Controllers\operator\ReportController as OperatorReportController;
 use App\Http\Controllers\user\ReportController as UserReportController;
@@ -11,7 +13,6 @@ use App\Http\Controllers\petugas\ReportController as PetugasReportController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportCategoryController;
 use Illuminate\Support\Facades\Route;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,7 +27,6 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
-
 /*------------------------ Route Admin ------------------------ */
 
 Route::prefix('/admin')->name('admin.')->middleware(['admin', 'verified'])->group(function () {
@@ -38,15 +38,18 @@ Route::prefix('/admin')->name('admin.')->middleware(['admin', 'verified'])->grou
 
         Route::prefix('/category')->name('category.')->group(function () {
             Route::post('/create', [ReportCategoryController::class, 'store'])->name('store');
-            Route::post('/update/{id}', [ReportCategoryController::class, 'update'])->name('update');
             Route::get('/update/{id}', [ReportCategoryController::class, 'edit'])->name('edit');
             Route::post('/update/{id}', [ReportCategoryController::class, 'update'])->name('update');
             Route::get('/delete/{id}', [ReportCategoryController::class, 'destroy'])->name('delete');
         });
     });
 
-    Route::prefix('/manajemen-operator')->name('manajemen-petugas.')->group(function () {
-        Route::get('/', [PetugasController::class, 'index'])->name('index');
+    Route::prefix('/manajemen-akun')->name('manajemen-akun.')->group(function () {
+        Route::get('/', [OperatorController::class, 'index'])->name('index');
+        Route::post('/create', [OperatorController::class, 'store'])->name('store');
+        Route::post('/verify', [OperatorController::class, 'verify'])->name('verify');
+        Route::post('/resend-email-verification', [OperatorController::class, 'resendVerify'])->name('resend');
+        Route::delete('/delete/{id}', [OperatorController::class, 'destroy'])->name('delete');
     });
 });
 /*------------------------ End Route Admin -------------------- */
@@ -62,9 +65,9 @@ Route::prefix('/operator')->name('operator.')->middleware(['operator', 'verified
         Route::get('/create', [OperatorReportController::class, 'create'])->name('create');
         Route::post('/create', [OperatorReportController::class, 'store'])->name('store');
         Route::get('/view/{id}', [OperatorReportController::class, 'show'])->name('view');
-        // Route::get('/update/{id}', [OperatorReportController::class, 'edit'])->name('edit');
-        // Route::post('/update/{id}', [OperatorReportController::class, 'update'])->name('update');
-        Route::get('/delete/{id}', [OperatorReportController::class, 'destroy'])->name('delete');
+        Route::get('/update/{id}', [OperatorReportController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [OperatorReportController::class, 'update'])->name('update');
+        Route::delete('/delete/{id}', [OperatorReportController::class, 'destroy'])->name('delete');
     });
 
     Route::prefix('/manajemen-petugas')->name('manajemen-petugas.')->group(function () {
@@ -90,7 +93,7 @@ Route::prefix('/petugas')->name('petugas.')->middleware(['petugas', 'verified'])
         Route::get('/view', [PetugasReportController::class, 'view'])->name('view');
     });
 
-    Route::prefix('/riwayat-laporan')->name('riwayat-laporan.')->group(function () {
+    Route::prefix('/laporan-tertangani')->name('laporan-tertangani.')->group(function () {
         Route::get('/', [PetugasReportController::class, 'riwayat'])->name('riwayat');
     });
 });
@@ -115,13 +118,15 @@ Route::prefix('/user')->name('user.')->middleware(['user', 'verified'])->group(f
 });
 /*------------------------ End Route User -------------------- */
 
-// Route::get('/', function () {
-//     Route::get('/', [DashboardController::class, 'index']);
-// });
-
-Route::get('/', function () {
-    return view('dashboard');
+Route::prefix('/notifications')->name('notifications.')->group(function () {
+    Route::get('/', [NotificationController::class, 'get'])->name('get');
 });
+
+Route::get('/', [DashboardController::class, 'index'])->name('index');
+
+// Route::get('/', function () {
+//     return view('dashboard');
+// });
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -129,8 +134,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__ . '/auth.php';

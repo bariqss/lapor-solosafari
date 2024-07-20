@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ asset('assets/css/tailwind.output.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/tailwind.css') }}" />
 
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.0/css/dataTables.tailwindcss.css">
+
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -84,7 +86,7 @@
 
                     <div class="w-full p-4 mt-6 mb-6 overflow-hidden bg-white rounded-lg shadow-lg">
                         <div class="w-full overflow-x-auto">
-                            <table class="w-full whitespace-no-wrap">
+                            <table id="example" style="width:100%" class="w-full whitespace-no-wrap display">
                                 <caption
                                     class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white">
                                     Riwayat Kejadian
@@ -100,7 +102,7 @@
                                         <th class="px-4 py-3"></th>
                                     </tr>
                                 </thead>
-                                {{-- <tbody class="bg-white divide-y">
+                                <tbody class="bg-white divide-y">
                                     @foreach ($reports as $report)
                                     <tr class="text-gray-700">
                                         <td class="px-4 py-3 ">
@@ -135,7 +137,7 @@
                                             </span>
                                         </td>
                                         <td class="px-4 py-3 text-xs">
-                                            <a href="{{ route('laporan.view', $report->id) }}">
+                                            <a href="{{ route('user.laporan.view', $report->id) }}">
                                                 <button type="button"
                                                     class="px-5 py-2 focus:outline-none text text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm me-2 mb-2">
                                                     Detail
@@ -144,10 +146,10 @@
                                         </td>
                                     </tr>
                                     @endforeach
-                                </tbody> --}}
+                                </tbody>
                             </table>
                             <div>
-                                {{-- {{ $reports->links('pagination::default') }} --}}
+                                {{ $reports->links('pagination::default') }}
                             </div>
                         </div>
                     </div>
@@ -163,9 +165,16 @@
                 }
     </script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <script src="{{ asset('assets/js/init-alpine.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+
+    <script src="https://cdn.datatables.net/2.1.0/js/dataTables.tailwindcss.js"></script>
+
+    <script>
+        new DataTable('#example');
+    </script>
 
     @stack('script')
 </body>

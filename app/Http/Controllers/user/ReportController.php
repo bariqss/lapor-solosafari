@@ -89,7 +89,7 @@ class ReportController extends Controller
         $location = Location::where('id', $id)->firstOrFail();
         $categories = ReportCategory::all();
         $report = Report::where('id', $id)->firstOrFail();
-        
+
         return view('user.laporan.view', compact('report', 'categories', 'location'));
     }
 }

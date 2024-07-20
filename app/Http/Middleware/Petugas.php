@@ -14,7 +14,7 @@ class Petugas
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle(Request $request, Closure $next): Response
-    { 
+    {
         {
             if (isset(auth()->user()->role)) {
                 if (auth()->user()->role == 'petugas') {
@@ -22,7 +22,7 @@ class Petugas
                 }
             }
 
-            return redirect()->route('user')->with('error', "You don't have petugas access.");
+            return redirect()->route('user.dashboard')->with('error', "You don't have petugas access.");
         }
     }
 }

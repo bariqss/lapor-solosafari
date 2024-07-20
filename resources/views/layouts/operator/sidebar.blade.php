@@ -1,4 +1,4 @@
-<aside class="z-20 hidden w-64 overflow-y-auto bg-white md:block flex-shrink-0" style="background-color: #696CFF">
+<aside class="z-20 hidden w-64 overflow-y-auto bg-blue-700 md:block flex-shrink-0">
     <div class="py-4">
         <div class="flex justify-center">
             <a href="index.html">
@@ -41,16 +41,16 @@
     x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0"
     class="fixed inset-0 z-10 flex items-end bg-black bg-opacity-50 sm:items-center sm:justify-center"></div>
-<aside class="fixed inset-y-0 z-20 flex-shrink-0 w-64 mt-16 overflow-y-auto bg-white md:hidden" x-show="isSideMenuOpen"
+<aside class="fixed inset-y-0 z-20 flex-shrink-0 w-64 mt-16 overflow-y-auto bg-blue-700 md:hidden" x-show="isSideMenuOpen"
     x-transition:enter="transition ease-in-out duration-150"
     x-transition:enter-start="opacity-0 transform -translate-x-20" x-transition:enter-end="opacity-100"
     x-transition:leave="transition ease-in-out duration-150" x-transition:leave-start="opacity-100"
     x-transition:leave-end="opacity-0 transform -translate-x-20" @click.away="closeSideMenu"
-    @keydown.escape="closeSideMenu" style="background-color: #696CFF">
+    @keydown.escape="closeSideMenu">
     <div class=" py-4 text-gray-500">
         <div class="flex justify-center">
             <a href="index.html">
-                <img src="{{ asset('assets/img/logo-solo-safari.png') }}" alt="logo" style="height: 100px">
+                <img src="{{ asset('assets/img/logo-solo-safari-white.png') }}" alt="logo" style="height: 100px">
             </a>
         </div>
         <ul class="mt-6">

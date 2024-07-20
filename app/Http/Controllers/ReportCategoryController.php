@@ -7,9 +7,11 @@ use Illuminate\Http\Request;
 
 class ReportCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
+
     public function index()
     {
         //
@@ -62,13 +64,13 @@ class ReportCategoryController extends Controller
             'nama_kategori' => $request->nama_kategori,
         ]);
 
-        return redirect(route('manajemen-pelaporan.index'))->with('success', 'Kategori berhasil diupdate');
+        return redirect(route('admin.manajemen-pelaporan.index'))->with('success', 'Kategori berhasil diupdate');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ReportCategory $id)
+    public function destroy(String $id)
     {
         ReportCategory::where('id', $id)->delete();
 

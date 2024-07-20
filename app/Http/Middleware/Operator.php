@@ -21,6 +21,6 @@ class Operator
             }
         }
 
-        return redirect()->route('user.dashboard')->with('error', "You don't have operator access.");
+        return redirect()->route('petugas.dashboard')->with('error', "You don't have operator access.");
     }
 }
