@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\operator;
 
+use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
 use App\Models\Location;
+use App\Models\Notification;
 use App\Models\Report;
 use App\Models\ReportCategory;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
@@ -41,19 +44,6 @@ class ReportController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'validasi' => 'required',
-            'level' => 'required',
-            'status' => 'required',
-        ]);
-
-        $report = Report::create([
-            'validasi' => $request->validasi,
-            'level' => $request->level,
-            'status' => $request->status,
-        ]);
-
-        return redirect()->back()->with('success', 'Laporan berhasil diupdate');
     }
 
     /**
@@ -84,6 +74,7 @@ class ReportController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        // dd('update');
         $report = Report::where('id', $id)->firstOrFail();
 
         Report::where('id', $id)->update([
@@ -91,6 +82,16 @@ class ReportController extends Controller
             'level' => $request->level,
             'status' => $request->status,
         ]);
+
+        $all_petugas = User::where('role', UserRole::PETUGAS)->get();
+
+        foreach ($all_petugas as $petugas) {
+            Notification::create([
+                'user_id' => $petugas->id,
+                'report_id' => $report->id,
+                'status' => 'Anda mendapat tugas penanganan'
+            ]);
+        }
 
         return redirect()->route('operator.manajemen-laporan.view', $report->id)->with('success', 'Laporan berhasil diupdate');
     }

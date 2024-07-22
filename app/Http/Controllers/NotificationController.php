@@ -14,7 +14,12 @@ class NotificationController extends Controller
         $user = Auth::user();
         $notifications = Notification::where([['is_read', false], ['user_id', $user->id]])->get();
 
-        return response($notifications);
+        return
+            response()->json([
+                'code' => 200,
+                'message' => 'success',
+                'data' => $notifications,
+            ]);
     }
 
 
@@ -47,7 +52,6 @@ class NotificationController extends Controller
      */
     public function show(Notification $notification)
     {
-        //
     }
 
     /**

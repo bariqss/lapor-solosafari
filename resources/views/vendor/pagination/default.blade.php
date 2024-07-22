@@ -12,7 +12,7 @@
                 {{-- Previous Page Link --}}
                 @if ($paginator->onFirstPage())
                 <li class="disabled" aria-disabled="true" aria-label="@lang('pagination.previous')">
-                    <button class="px-2 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
+                    <button class="px-2 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-blue"
                         aria-label="Previous">
                         <svg aria-hidden="true" class="w-4 h-4 fill-current" viewBox="0 0 20 20">
                             <path
@@ -25,7 +25,7 @@
                 @else
                 <li>
                     <a href="{{ $paginator->previousPageUrl() }}" rel="prev" aria-label="@lang('pagination.previous')">
-                        <button class="px-2 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-purple"
+                        <button class="px-2 py-1 rounded-md rounded-l-lg focus:outline-none focus:shadow-outline-blue"
                             aria-label="Previous">
                             <svg aria-hidden="true" class="w-4 h-4 fill-current" viewBox="0 0 20 20">
                                 <path
@@ -44,7 +44,7 @@
                 @foreach ($elements as $element)
                 {{-- "Three Dots" Separator --}}
                 @if (is_string($element))
-                <li class="disabled px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"
+                <li class="disabled px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-blue"
                     aria-disabled="true">
                     <span>{{ $element }}</span>
                 </li>
@@ -54,10 +54,10 @@
                 @if (is_array($element))
                 @foreach ($element as $page => $url)
                 @if ($page == $paginator->currentPage())
-                <li class="active px-3 py-1 text-white transition-colors duration-150 bg-purple-700 border border-r-0 border-purple rounded-md focus:outline-none focus:shadow-outline-purple"
+                <li class="active px-3 py-1 text-white transition-colors duration-150 bg-blue-700 border border-r-0 border-blue rounded-md focus:outline-none focus:shadow-outline-blue"
                     aria-current="page"><span>{{ $page }}</span></li>
                 @else
-                <li class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-purple"><a href="{{ $url }}">{{
+                <li class="px-3 py-1 rounded-md focus:outline-none focus:shadow-outline-blue"><a href="{{ $url }}">{{
                         $page }}</a></li>
                 @endif
                 @endforeach
@@ -68,7 +68,7 @@
                 @if ($paginator->hasMorePages())
                 <li>
                     <a href="{{ $paginator->nextPageUrl() }}" rel="next" aria-label="@lang('pagination.next')">
-                        <button class="px-2 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
+                        <button class="px-2 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-blue"
                             aria-label="Next">
                             <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
                                 <path
@@ -81,7 +81,7 @@
                 @else
                 <li class="disabled" aria-disabled="true" aria-label="@lang('pagination.next')">
                     <span aria-hidden="true"><button
-                            class="px-2 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-purple"
+                            class="px-2 py-1 rounded-md rounded-r-lg focus:outline-none focus:shadow-outline-blue"
                             aria-label="Next">
                             <svg class="w-4 h-4 fill-current" aria-hidden="true" viewBox="0 0 20 20">
                                 <path

@@ -16,5 +16,9 @@ class KategoriSeeder extends Seeder
         ReportCategory::query()->create([
             'nama_kategori' => 'Fasilitas Solo Safari',
         ]);
+
+        ReportCategory::query()->create([
+            'nama_kategori' => 'Hewan Solo Safari',
+        ]);
     }
 }

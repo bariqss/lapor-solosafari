@@ -79,12 +79,12 @@ class ReportController extends Controller
         return redirect(route('user.riwayat-laporan.riwayat'))->with('success', 'Laporan berhasil dikirim');
     }
 
-    public function view($id)
+    public function show(string $id)
     {
         $location = Location::where('id', $id)->firstOrFail();
         $categories = ReportCategory::all();
         $report = Report::where('id', $id)->firstOrFail();
 
-        return view('user.laporan.view', compact('report', 'categories', 'location'));
+        return view('petugas.laporan.view', compact('report', 'location', 'categories'));
     }
 }

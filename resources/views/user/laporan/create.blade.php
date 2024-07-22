@@ -103,33 +103,21 @@
     const x = document.getElementById("latitude");
     const y = document.getElementById("longitude");
 
-function getLocation() {
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else {
-    x.innerHTML = "Geolocation is not supported by this browser.";
-  }
-}
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
 
-function showPosition(position) {
-  x.value = position.coords.latitude;
-  y.value = position.coords.longitude;
-}
+    function showPosition(position) {
+        x.value = position.coords.latitude;
+        y.value = position.coords.longitude;
+    }
 </script>
 
 <script>
-    // document.getElementById('gambar').addEventListener('change', function(event) {
-    //         const file = event.target.files[0];
-    //         if (file) {
-    //             const reader = new FileReader();
-    //             reader.onload = function(e) {
-    //                 const container = document.getElementById('image-upload-container');
-    //                 container.innerHTML = `<img src="${e.target.result}" class="w-full h-64 object-cover rounded-lg" />`;
-    //             }
-    //             reader.readAsDataURL(file);
-    //         }
-    //     });
-
     const dateInput = document.getElementById('datepicker-actions');
     const today = new Date().toISOString().split('T')[0];;
     dateInput.value = today;

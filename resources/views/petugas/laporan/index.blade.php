@@ -35,7 +35,10 @@
                         {{$report->category->nama_kategori}}
                     </td>
                     <td class="px-4 py-3 text-xs">
-                        @if ($report->level == 1)
+                        @if ($report->level == null)
+                        <span
+                            class="bg-gray-100 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-full">-</span>
+                        @elseif ($report->level == 1)
                         <span
                             class="bg-green-100 text-green-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-full">Rendah</span>
                         @elseif($report->level == 2)
@@ -47,12 +50,15 @@
                         @endif
                     </td>
                     <td class="px-4 py-3 text-xs">
-                        @if ($report->status == 1)
+                        @if ($report->status == null)
+                        <span
+                            class="bg-gray-100 text-gray-800 text-sm font-medium me-2 px-2.5 py-0.5 rounded-full">-</span>
+                        @elseif ($report->status == 1)
                         <span class="bg-red-100 text-red-800 text-xs font-medium me-2 px-2.5 py-0.5 rounded-md">Belum
                             Ditangani</span>
                         @elseif($report->status == 2)
                         <span
-                            class="bg-yellow-50 text-yellow-800 border border-yellow-300 text-xs font-medium me-2 px-2.5 py-0.5 rounded-md">Proses
+                            class="bg-yellow-50 text-yellow-800  text-xs font-medium me-2 px-2.5 py-0.5 rounded-md">Proses
                             Penanganan</span>
                         @else
                         <span

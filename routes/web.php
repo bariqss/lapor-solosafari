@@ -88,9 +88,9 @@ Route::prefix('/petugas')->name('petugas.')->middleware(['petugas', 'verified'])
 
     Route::prefix('/laporan')->name('laporan.')->group(function () {
         Route::get('/', [PetugasReportController::class, 'index'])->name('index');
-        Route::get('/create', [PetugasReportController::class, 'create'])->name('create');
-        Route::post('/create', [PetugasReportController::class, 'store'])->name('store');
-        Route::get('/view', [PetugasReportController::class, 'view'])->name('view');
+        Route::get('/create/{id}', [PetugasReportController::class, 'create'])->name('create');
+        Route::post('/create/{id}', [PetugasReportController::class, 'store'])->name('store');
+        Route::get('/view/{id}', [PetugasReportController::class, 'show'])->name('view');
     });
 
     Route::prefix('/laporan-tertangani')->name('laporan-tertangani.')->group(function () {
@@ -120,6 +120,7 @@ Route::prefix('/user')->name('user.')->middleware(['user', 'verified'])->group(f
 
 Route::prefix('/notifications')->name('notifications.')->group(function () {
     Route::get('/', [NotificationController::class, 'get'])->name('get');
+    Route::get('/detail/{id}', [NotificationController::class, 'show'])->name('detail');
 });
 
 Route::get('/', [DashboardController::class, 'index'])->name('index');
