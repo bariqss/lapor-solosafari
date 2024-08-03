@@ -64,7 +64,7 @@
             </header>
 
             <main class="h-full pb-16 overflow-y-auto">
-                <div class="container grid px-10">
+                <div class="grid w-full px-10">
                     <div class="flex flex-col mt-6 mb-6 shadow-md">
                         <div
                             class="bg-center bg-no-repeat bg-[url('/resources/img/bg-solo-safari.jpg')] rounded-lg bg-gray-400 bg-blend-multiply">

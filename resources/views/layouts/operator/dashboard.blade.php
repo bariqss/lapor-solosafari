@@ -117,7 +117,7 @@
                                     aria-label="submenu">
                                     <li class="flex">
                                         <a class="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800"
-                                            href="#">
+                                            href="">
                                             <svg class="w-4 h-4 mr-3" aria-hidden="true" fill="none"
                                                 stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 viewBox="0 0 24 24" stroke="currentColor">
@@ -172,17 +172,54 @@
                     </div>
 
                     @yield('content')
+
+                    <div id="alert" tabindex="-1"
+                        class="hidden flex overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+                        <div class="relative p-4 w-full max-w-md max-h-full ">
+                            <div class="flex justify-center items-center ">
+                                <div
+                                    class="bg-white rounded-lg shadow-lg p-6 max-w-sm w-full text-center border-2 border-gray-200">
+                                    <div
+                                        class="bg-blue-500 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-white" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M5 13l4 4L19 7" />
+                                        </svg>
+                                    </div>
+                                    <h2 class="text-2xl font-semibold mb-2">
+                                        {{\Session::get('success') }}
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
     <script>
         function logout(){
                 const form = document.getElementById("logout");
                 form.submit();
             }
+
+        $( document ).ready(function() {
+            // $('#alert').modal('show')
+            @if (\Session::has('success'))
+                $('#alert').removeClass('hidden');
+
+                setTimeout(function() {
+                $('#alert').addClass('hidden');
+            }, 2000);
+            @endif
+            // alert( "alert!" );
+        });
     </script>
+
 
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="{{ asset('assets/js/init-alpine.js') }}"></script>

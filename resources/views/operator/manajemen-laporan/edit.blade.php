@@ -1,6 +1,6 @@
 @extends('layouts.operator.dashboard')
 
-@section('title', 'Detail Laporan')
+@section('title', 'Update Laporan')
 
 @section('breadcrumb')
 <nav class="py-4 px-4 flex" aria-label="Breadcrumb">
@@ -15,7 +15,7 @@
             <div class="flex items-center">
                 <span class="mx-2 text-gray-400">/</span>
                 <span class="ms-1 text-sm font-medium text-gray-700 md:ms-2">
-                    Detail Laporan
+                    Update Laporan
                 </span>
             </div>
         </li>
@@ -79,7 +79,7 @@
                             Status Laporan
                         </label>
                         <select id="validasi" name="validasi"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             <option value="">Pilih Status Laporan</option>
                             <option value="1" {{ $report->validasi == "1" ? "selected" : "" }}>Valid</option>
                             <option value="2" {{ $report->validasi == "2" ? "selected" : "" }}>Tidak Valid</option>
@@ -89,7 +89,7 @@
                         <label for="level" class="block mb-2 text-sm font-semibold text-gray-900">Level
                             Kejadian</label>
                         <select id="level" name="level"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             <option value="">Pilih Level</option>
                             <option value="1" {{ $report->level == "1" ? "selected" : "" }}>Rendah</option>
                             <option value="2" {{ $report->level == "2" ? "selected" : "" }}>Sedang</option>
@@ -101,7 +101,7 @@
                             Status Penanganan
                         </label>
                         <select id="status" name="status"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-purple-500 focus:border-purple-500 block w-full p-2.5">
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             <option value="">Pilih Status Penanganan</option>
                             <option value="1" {{ $report->status == "1" ? "selected" : "" }}>Belum Ditangani</option>
                             <option value="2" {{ $report->status == "2" ? "selected" : "" }}>Proses Penanganan</option>
@@ -110,7 +110,7 @@
                     </div>
                     <div class="flex items-center justify-end gap-6">
                         <button type="submit"
-                            class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-purple-700 rounded-lg focus:ring-4 focus:ring-purple-200-200 hover:bg-purple-800">
+                            class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200-200 hover:bg-blue-800">
                             Update
                         </button>
                     </div>

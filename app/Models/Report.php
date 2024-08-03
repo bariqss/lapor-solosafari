@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Report extends Model
 {
@@ -32,6 +33,11 @@ class Report extends Model
     public function location(): HasMany
     {
         return $this->hasMany(Location::class, 'id_report');
+    }
+
+    public function penanganan(): HasOne
+    {
+        return $this->hasOne(ReportPenanganan::class, 'id_report');
     }
 
     protected static function booted(): void

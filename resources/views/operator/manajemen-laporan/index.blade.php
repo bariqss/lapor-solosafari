@@ -109,7 +109,7 @@
     <div class="w-full p-4 mt-4 mb-6 overflow-hidden bg-white rounded-lg shadow-lg">
         <div class="w-full overflow-x-auto">
 
-            <div class="pb-4 bg-white dark:bg-gray-900">
+            {{-- <div class="pb-4 bg-white dark:bg-gray-900">
                 <label for="table-search" class="sr-only">Search</label>
                 <div class="relative mt-1">
                     <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -123,7 +123,7 @@
                         class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Search for items">
                 </div>
-            </div>
+            </div> --}}
 
             <table id="table" class="w-full whitespace-no-wrap">
                 <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white">
@@ -344,6 +344,11 @@
             $('#table').DataTable({
                 columns: [ null, null, null, null,null,{ orderable: false },],
                 // searching: false,
+                // order: [[4, "asc"]],
+                order: [
+                [4, 'asc'],
+                [3, 'desc']
+                ],
                 paging:false,
                 info:false
             });

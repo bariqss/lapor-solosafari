@@ -23,58 +23,15 @@ class NotificationController extends Controller
     }
 
 
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function show(Notification $id)
     {
-        //
-    }
+        /** @var \App\Models\User */
+        $user = Auth::user();
+        $notification = $id;
+        $report = $notification->report;
+        $id->is_read = true;
+        $id->save();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Notification $notification)
-    {
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Notification $notification)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Notification $notification)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Notification $notification)
-    {
-        //
+        return redirect()->route('petugas.laporan.view', $report->id);
     }
 }

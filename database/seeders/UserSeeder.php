@@ -53,5 +53,16 @@ class UserSeeder extends Seeder
             'telepon' => $faker->phoneNumber,
             'role' => UserRole::USER,
         ]);
+
+        // for ($i = 0; $i < 10; $i++) {
+        //     User::query()->create([
+        //         'name' => 'User',
+        //         'email' => 'user@gmail.com',
+        //         'email_verified_at' => Carbon::now(),
+        //         'password' => Hash::make('12345678'),
+        //         'telepon' => $faker->phoneNumber,
+        //         'role' => UserRole::USER,
+        //     ]);
+        // }
     }
 }

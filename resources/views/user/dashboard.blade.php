@@ -27,10 +27,46 @@
 <!-- New Table -->
 <div class="w-full p-4 mt-4 mb-6 overflow-hidden bg-white rounded-lg shadow-lg">
     <div class="w-full overflow-x-auto">
-        <table id="table" class="w-full whitespace-no-wrap">
-            <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white">
+
+
+        <div class="flex justify-between items-center">
+            <h1 class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white">
                 Daftar Laporan Kejadian
-            </caption>
+            </h1>
+
+            <div class="justify-center">
+                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+                    class="text-gray-800 border-2 border-green-800 hover:bg-green-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                    type="button">Level Kejadian
+                    <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 10 6">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 4 4 4-4" />
+                    </svg>
+                </button>
+
+                <!-- Dropdown menu -->
+                <div id="dropdown"
+                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+                        <li>
+                            <a href="{{url()->current().'?level=1' }}"
+                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Rendah</a>
+                        </li>
+                        <li>
+                            <a href="{{url()->current().'?level=2' }}"
+                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sedang</a>
+                        </li>
+                        <li>
+                            <a href="{{url()->current().'?level=3' }}"
+                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Tinggi</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <table id="table" class="w-full whitespace-no-wrap mt-4">
             <thead>
                 <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase bg-gray-50">
                     <th class="px-4 py-3 cursor-pointer">
@@ -93,7 +129,7 @@
                     <td class="px-4 py-3 ">
                         <div class="flex items-center text-sm">
                             <div>
-                                <p>{{$report->name}}</p>
+                                <p>{{ $report->name }}</p>
                             </div>
                         </div>
                     </td>
@@ -151,23 +187,99 @@
         </div>
     </div>
 </div>
+
+<div class="grid gap-6 mb-8 md:grid-cols-2">
+    <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+        <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+            Jumlah Kejadian Menurut Waktud
+        </h4>
+        <canvas id="chart"></canvas>
+        <div class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
+            <!-- Chart legend -->
+            <div class="flex items-center">
+                <span class="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
+                <span>Jumlah Laporan</span>
+            </div>
+        </div>
+    </div>
+    <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
+        <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
+            Revenue
+        </h4>
+        <canvas id="pie"></canvas>
+        <div class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
+            <!-- Chart legend -->
+            <div class="flex items-center">
+                <span class="inline-block w-3 h-3 mr-1 bg-blue-500 rounded-full"></span>
+                <span>Shirts</span>
+            </div>
+            <div class="flex items-center">
+                <span class="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
+                <span>Shoes</span>
+            </div>
+            <div class="flex items-center">
+                <span class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
+                <span>Bags</span>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 @endsection
 
 @push('script')
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js">
-</script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 
 <script src="https://cdn.datatables.net/2.1.0/js/dataTables.tailwindcss.js"></script>
 
 <script>
     $(document).ready(function() {
             $('#table').DataTable({
-                columns: [ null, null, null, null,null,{ orderable: false },],
+                columns: [null, null, null, null, null, {
+                    orderable: false
+                }, ],
+                order: [
+                    [1, "desc"]
+                ],
                 searching: false,
-                paging:false,
-                info:false
+                paging: false,
+                info: false
             });
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const barConfig = {
+                type: 'bar',
+                data: {
+                    labels: @json($chartData['labels']),
+                    datasets: [{
+                        label: 'Laporan Kejadian',
+                        backgroundColor: '#0694a2',
+                        // borderColor: window.chartColors.red,
+                        borderWidth: 1,
+                        data: @json($chartData['data']),
+                    }, ],
+                },
+                options: {
+                    responsive: true,
+                    legend: {
+                        display: false,
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: function(value) {
+                                    return Math.floor(value); // Mengubah nilai menjadi integer
+                                }
+                            }
+                        }
+                    }
+                },
+            }
+
+            const barsCtx = document.getElementById('chart')
+            window.myBar = new Chart(barsCtx, barConfig)
         });
 </script>
 @endpush

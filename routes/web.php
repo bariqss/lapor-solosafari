@@ -9,6 +9,7 @@ use App\Http\Controllers\operator\PetugasController;
 use App\Http\Controllers\operator\ReportController as OperatorReportController;
 use App\Http\Controllers\user\ReportController as UserReportController;
 use App\Http\Controllers\PelaporanController;
+use App\Http\Controllers\petugas\ProfileController as PetugasProfileController;
 use App\Http\Controllers\petugas\ReportController as PetugasReportController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReportCategoryController;
@@ -96,6 +97,10 @@ Route::prefix('/petugas')->name('petugas.')->middleware(['petugas', 'verified'])
     Route::prefix('/laporan-tertangani')->name('laporan-tertangani.')->group(function () {
         Route::get('/', [PetugasReportController::class, 'riwayat'])->name('riwayat');
     });
+
+    Route::prefix('/profile')->name('profile.')->group(function () {
+        Route::get('/', [PetugasProfileController::class, 'index'])->name('index');
+    });
 });
 /*------------------------ End Route Petugas -------------------- */
 
@@ -129,11 +134,11 @@ Route::get('/', [DashboardController::class, 'index'])->name('index');
 //     return view('dashboard');
 // });
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 
 require __DIR__ . '/auth.php';

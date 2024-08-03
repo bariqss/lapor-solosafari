@@ -6,25 +6,31 @@
         <div class="flex justify-center">
             <img src="{{ asset('assets/img/logo-solo-safari.png') }}" alt="logo" style="height: 100px">
         </div>
-        <h1 class="mb-4 text-xl font-bold text-center text-gray-900 md:text-2xl dark:text-white">
+        <h1 class="mb-4 text-xl font-bold text-center text-gray-900 md:text-2xl">
             LOGIN
         </h1>
         <form role="form" action="{{route('login')}}" method="POST">
             @csrf
             <div class="mb-2">
-                <input type="email" name="email" id="email"
-                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Email" required autofocus autocomplete="username">
+                <input type="text" name="email" id="email"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5"
+                    placeholder="Email" autofocus autocomplete="username">
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
-            <div class="mb-4">
+            <div class="mb-4 relative">
                 <input type="password" name="password" id="password" placeholder="Password"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5"
+                    autocomplete="current-password">
+                <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 px-4 py-2 text-gray-400">
+                    <i class="fa-regular fa-eye" id="toggleIcon"></i>
+                </button>
+                {{-- <input type="password" name="password" id="password" placeholder="Password"
                     class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    required autocomplete="current-password">
+                    required autocomplete="current-password"> --}}
                 <x-input-error :messages="$errors->get('password')" class="mt-2" />
             </div>
             <button type="submit"
-                class="mb-4 px-6 py-3.5 w-full text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-semibold rounded-lg text-sm text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                class="mb-4 px-6 py-3.5 w-full text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-semibold rounded-lg text-sm text-center">
                 Login
             </button>
         </form>
@@ -53,7 +59,28 @@
     @endsection
 
 
+    @push('script')
+    <script>
+        const togglePassword = document.querySelector('#togglePassword');
+        const password = document.querySelector('#password');
+        const toggleIcon = document.querySelector('#toggleIcon');
 
+        togglePassword.addEventListener('click', function (e) {
+            // toggle the type attribute
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+
+            // change the icon
+            if (type === 'password') {
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            } else {
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            }
+        });
+    </script>
+    @endpush
 
     {{-- <x-guest-layout>
         <!-- Session Status -->

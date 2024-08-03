@@ -55,6 +55,8 @@ class ReportController extends Controller
         $categories = ReportCategory::all();
         $report = Report::where('id', $id)->firstOrFail();
 
+        // dd($report->penanganan);
+        
         return view('operator.manajemen-laporan.view', compact('report', 'location', 'categories'));
     }
     /**

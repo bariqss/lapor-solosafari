@@ -1,27 +1,6 @@
 @extends('layouts.user.dashboard')
 @section('title', 'Detail Laporan')
 
-@section('breadcrumb')
-<nav class="py-4 px-4 flex" aria-label="Breadcrumb">
-    <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-        <li class="inline-flex items-center">
-            <a href="{{ route('user.laporan.index') }}"
-                class="inline-flex items-center text-sm font-medium text-gray-700 hover:text-blue-600">
-                Dashboard
-            </a>
-        </li>
-        <li>
-            <div class="flex items-center">
-                <span class="mx-2 text-gray-400">/</span>
-                <span class="ms-1 text-sm font-medium text-gray-700 md:ms-2">Detail
-                    Laporan
-                </span>
-            </div>
-        </li>
-    </ol>
-</nav>
-@endsection
-
 @section('content')
 <div class="mt-8 grid grid-flow-row-dense lg:grid-cols-3 gap-4">
     <div class="col-span-2 lg:col-span-2 mb-6 p-10 rounded-lg shadow-md bg-white ">

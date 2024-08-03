@@ -4,9 +4,11 @@ namespace App\Http\Controllers\petugas;
 
 use App\Http\Controllers\Controller;
 use App\Models\Image;
+use App\Models\ImagePenanganan;
 use App\Models\Location;
 use App\Models\Report;
 use App\Models\ReportCategory;
+use App\Models\ReportPenanganan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,22 +17,22 @@ class ReportController extends Controller
     public function index()
     {
         $reports = Report::paginate(10);
+        $categories = ReportCategory::all();
 
-        return view('petugas.laporan.index', compact('reports'));
+        return view('petugas.laporan.index', compact('reports', 'categories'));
     }
 
     public function riwayat()
     {
-        $reports = Report::paginate(10);
+        $reports = ReportPenanganan::paginate(10);
 
         return view('petugas.laporan-tertangani.index', compact('reports'));
     }
 
-    public function create()
+    public function create(string $id)
     {
-        $reports = Report::all();
-        $categories = ReportCategory::all();
-        return view('petugas.laporan.create', compact('reports', 'categories'));
+        $report = Report::where('id', $id)->firstOrFail();
+        return view('petugas.laporan.create', compact('report'));
     }
 
     public function store(Request $request)
@@ -40,11 +42,7 @@ class ReportController extends Controller
         // dd($request->all());
 
         $request->validate([
-            'judul' => 'required',
             'tanggal' => 'required',
-            'kategori' => 'required',
-            'latitude' => 'required',
-            'longitude' => 'required',
             'deskripsi' => 'required',
             'gambar' => 'required',
         ]);
@@ -53,26 +51,18 @@ class ReportController extends Controller
         $fileName = time() . '.' . $request->gambar->extension();
         $request->gambar->move(public_path('assets/images'), $fileName);
 
-        $location = Location::create([
-            'latitude' => $request['latitude'],
-            'longitude' => $request['longitude'],
-        ]);
-        // dd($location);
-
-        $report = Report::create([
+        $report = ReportPenanganan::create([
             'id_user' => $user->id,
-            'name' => $request->judul,
+            'id_report' => $request->id_report,
             'date' => $request->tanggal,
-            'id_category' => $request->kategori,
-            'id_location' => $location->id,
-            'description' => $request->deskripsi,
+            'deskripsi_penanganan' => $request->deskripsi,
         ]);
 
         // dd($report);
 
-        Image::create([
+        ImagePenanganan::create([
             'name_image' => $fileName,
-            'id_report' => $report->id,
+            'id_reportpenanganan' => $report->id,
         ]);
         // dd($report);
 

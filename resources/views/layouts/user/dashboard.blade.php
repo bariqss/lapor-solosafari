@@ -12,7 +12,7 @@
         rel="stylesheet" />
 
     @vite('resources/css/app.css')
-    @vite(['resources/css/app.css','resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <link rel="stylesheet" href="{{ asset('assets/css/tailwind.output.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/tailwind.css') }}" />
@@ -21,6 +21,12 @@
         integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="{{ asset('/assets/js/charts-bars.js') }}" defer></script>
+    <script src="{{ asset('/assets/js/charts-pie.js') }}" defer></script>
 
     @stack('css')
 </head>
@@ -96,7 +102,7 @@
                                             <span>Settings</span>
                                         </a>
                                     </li>
-                                    <form action="{{route('logout')}}" method="POST" id="logout">
+                                    <form action="{{ route('logout') }}" method="POST" id="logout">
                                         @csrf
                                     </form>
                                     <li class="flex">
@@ -120,20 +126,42 @@
             </header>
 
             <main class="h-full pb-16 overflow-y-auto">
-                <div class="container grid px-10">
+                <div class="grid w-full px-10">
                     @yield('content')
-                </div>
             </main>
         </div>
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
     <script>
         function logout(){
                     const form = document.getElementById("logout");
                     form.submit();
                 }
+
+            $( document ).ready(function() {
+            // $('#alert').modal('show')
+            @if (\Session::has('success'))
+            $('#alert').removeClass('hidden');
+            setTimeout(function() {
+            $('#alert').addClass('hidden');
+            }, 1000);
+            @endif
+            // alert( "alert!" );
+            });
     </script>
 
+    <script>
+        function logout() {
+            const form = document.getElementById("logout");
+            form.submit();
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/datepicker.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
     <script src="{{ asset('assets/js/init-alpine.js') }}"></script>

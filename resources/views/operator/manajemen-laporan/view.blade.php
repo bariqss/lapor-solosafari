@@ -178,6 +178,7 @@
     <div class="hidden p-4 rounded-lg bg-gray-50 dark:bg-gray-800" id="styled-dashboard" role="tabpanel"
         aria-labelledby="dashboard-tab">
 
+        @if ($report->penanganan!=null)
         <div class="grid grid-flow-row-dense grid-cols-3">
             <div class="col-span-2 mb-6 p-10 rounded-lg shadow-md bg-white">
                 <div class="flex justify-center">
@@ -196,7 +197,7 @@
                     </div>
                     <div class="mb-4 sm:col-span-2">
                         <h2 class="font-semibold mb-2">Dokumentasi Kejadian</h2>
-                        @foreach ($report->decumentation_image as $image)
+                        @foreach ($report->penanganan->penanganan_image as $image)
                         <img src="{{ url('/assets/images/' . $image->name_image) }}" alt="image" @endforeach
                             style="max-width: 100%; width: 500px">
                     </div>
@@ -204,7 +205,7 @@
                         <label for="description" class="block mb-2 text-sm font-semibold text-gray-900">Deskripsi
                             Kejadian</label>
                         <p>
-                            {{$report->description}}
+                            {{$report->penanganan->deskripsi_penanganan}}
                         </p>
                     </div>
                 </div>
@@ -267,7 +268,7 @@
                 </div>
 
                 <div class="flex flex-col h-fit p-6 rounded-lg shadow-md bg-white">
-                    <h1 class="text-lg font-bold">Pelapor Kejadian</h1>
+                    <h1 class="text-lg font-bold">Pelapor Penanganan</h1>
                     <div class="mt-4">
                         <div class="flex items-center mb-3">
                             <svg class="w-5 h-5" data-slot="icon" fill="none" stroke-width="2" stroke="currentColor"
@@ -276,7 +277,7 @@
                                     d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z">
                                 </path>
                             </svg>
-                            <h3 class="ml-2">{{ $report->user->name }}</h3>
+                            <h3 class="ml-2">{{ $report->penanganan->user->name }}</h3>
                         </div>
                         <div class="flex items-center">
                             <svg class="w-5 h-5" data-slot="icon" fill="none" stroke-width="2" stroke="currentColor"
@@ -285,12 +286,16 @@
                                     d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75">
                                 </path>
                             </svg>
-                            <h3 class="ml-2">{{ $report->user->email }}</h3>
+                            <h3 class="ml-2">{{ $report->penanganan->user->email }}</h3>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        @else
+        <p>URUNGG!!!!</p>
+        @endif
     </div>
 </div>
 @endsection

@@ -1,10 +1,10 @@
 @extends('layouts.petugas.dashboard')
 @section('title', 'Dashboard')
-@section('content')
 
-<div class="w-full p-4 mt-6 mb-6 overflow-hidden bg-white rounded-lg shadow-lg">
-    <div class="w-full overflow-x-auto">
-        <table class="w-full whitespace-no-wrap">
+@section('content')
+<div class="w-full h-fit p-4 mt-6 mb-6 overflow-hidden bg-white rounded-lg shadow-lg">
+    <div class="w-full h-fit overflow-x-auto ">
+        <table id="example" style="width:100%" class="w-full whitespace-no-wrap display">
             <caption class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white">
                 Daftar Laporan Kejadian
             </caption>
@@ -88,5 +88,4 @@
         </div>
     </div>
 </div>
-
 @endsection
