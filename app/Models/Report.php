@@ -13,7 +13,7 @@ class Report extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'id_user', 'date', 'id_location', 'id_category', 'description', 'level', 'status'];
+    protected $fillable = ['name', 'id_user', 'date', 'id_location', 'id_category', 'id_report_location', 'description', 'level', 'status'];
 
     public function user(): BelongsTo
     {
@@ -23,6 +23,11 @@ class Report extends Model
     public function category(): BelongsTo
     {
         return $this->belongsTo(ReportCategory::class, 'id_category');
+    }
+
+    public function report_location(): BelongsTo
+    {
+        return $this->belongsTo(ReportLocation::class, 'id_report_location');
     }
 
     public function decumentation_image(): HasMany

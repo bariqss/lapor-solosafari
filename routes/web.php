@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\OperatorController;
+use App\Http\Controllers\admin\ReportLocationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\NotificationController;
@@ -42,6 +43,13 @@ Route::prefix('/admin')->name('admin.')->middleware(['admin', 'verified'])->grou
             Route::get('/update/{id}', [ReportCategoryController::class, 'edit'])->name('edit');
             Route::post('/update/{id}', [ReportCategoryController::class, 'update'])->name('update');
             Route::get('/delete/{id}', [ReportCategoryController::class, 'destroy'])->name('delete');
+        });
+
+        Route::prefix('/lokasi')->name('lokasi.')->group(function () {
+            Route::post('/create', [ReportLocationController::class, 'store'])->name('store');
+            Route::get('/update/{id}', [ReportLocationController::class, 'edit'])->name('edit');
+            Route::post('/update/{id}', [ReportLocationController::class, 'update'])->name('update');
+            Route::get('/delete/{id}', [ReportLocationController::class, 'destroy'])->name('delete');
         });
     });
 
@@ -115,6 +123,8 @@ Route::prefix('/user')->name('user.')->middleware(['user', 'verified'])->group(f
         Route::get('/create', [UserReportController::class, 'create'])->name('create');
         Route::post('/create', [UserReportController::class, 'store'])->name('store');
         Route::get('/view/{id}', [UserReportController::class, 'view'])->name('view');
+        Route::get('/update/{id}', [UserReportController::class, 'edit'])->name('edit');
+        Route::post('/update/{id}', [UserReportController::class, 'update'])->name('update');
     });
 
     Route::prefix('/riwayat-laporan')->name('riwayat-laporan.')->group(function () {

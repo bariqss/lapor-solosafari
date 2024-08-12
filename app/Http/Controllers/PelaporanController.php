@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ReportCategory;
+use App\Models\ReportLocation;
 use Illuminate\Http\Request;
 
 class PelaporanController extends Controller
@@ -13,8 +14,11 @@ class PelaporanController extends Controller
     public function index()
     {
         $categories = ReportCategory::paginate(5, ['*'], 'list_category');
+        $locations = ReportLocation::paginate(10, ['*'], 'list_lokasi');
+        // $locations = DB::table('reports')->where('status', '2')->count();
 
-        return view('admin.manajemen-pelaporan.index', compact('categories'));
+
+        return view('admin.manajemen-pelaporan.index', compact('categories', 'locations'));
     }
 
     /**

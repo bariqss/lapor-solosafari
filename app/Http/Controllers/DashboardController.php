@@ -10,11 +10,40 @@ class DashboardController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $reports = Report::paginate(15);
+        $reportsChart = Report::selectRaw('MONTH(date) as month, COUNT(*) as count')
+            ->groupBy('month')
+            ->pluck('count', 'month');
 
-        return view('dashboard', compact('reports'));
+        $months = [
+            1 => 'Januari', 2 => 'Februari', 3 => 'Maret', 4 => 'April',
+            5 => 'Mei', 6 => 'Juni', 7 => 'Juli', 8 => 'Agustus',
+            9 => 'September', 10 => 'Oktober', 11 => 'November', 12 => 'Desember'
+        ];
+
+        $data = array_fill(1, 12, 0);
+        foreach ($reportsChart as $month => $count) {
+            $data[$month] = $count;
+        }
+
+        $chartData = [
+            'labels' => array_values($months),
+            'data' => array_values($data)
+        ];
+
+        $reports = Report::where(function ($q) use ($request) {
+            if (isset($request->level)) {
+                $q->where('level', $request->query('level'));
+            }
+            if (isset($request->status)) {
+                $q->where('status', $request->query('status'));
+            }
+        })->paginate(10);
+
+        // dd($chartData['counts']);
+
+        return view('dashboard', compact('reports', 'chartData'));
     }
 
     /**

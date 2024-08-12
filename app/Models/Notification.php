@@ -8,33 +8,33 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Notification extends Model
 {
-  use HasFactory;
+    use HasFactory;
 
-  protected $fillable = [
-    'user_id',
-    'report_id',
-    'status',
-    'is_read',
-  ];
+    protected $fillable = [
+        'user_id',
+        'report_id',
+        'status',
+        'is_read',
+    ];
 
-  protected $casts = [
-    'is_read' => 'boolean',
-  ];
+    protected $casts = [
+        'is_read' => 'boolean',
+    ];
 
-  protected static function booted(): void
-  {
-    static::creating(function (Notification $notification) {
-      $notification->is_read = false;
-    });
-  }
+    protected static function booted(): void
+    {
+        static::creating(function (Notification $notification) {
+            $notification->is_read = false;
+        });
+    }
 
-  public function user(): BelongsTo
-  {
-    return $this->belongsTo(User::class);
-  }
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
-  public function report(): BelongsTo
-  {
-    return $this->belongsTo(Report::class);
-  }
+    public function report(): BelongsTo
+    {
+        return $this->belongsTo(Report::class);
+    }
 }

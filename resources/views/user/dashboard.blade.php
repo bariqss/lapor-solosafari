@@ -29,44 +29,102 @@
     <div class="w-full overflow-x-auto">
 
 
-        <div class="flex justify-between items-center">
-            <h1 class="p-5 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white">
+        <div class="flex flex-col">
+            <h1 class="p-2 text-lg font-semibold text-left rtl:text-right text-gray-900 bg-white">
                 Daftar Laporan Kejadian
             </h1>
 
-            <div class="justify-center">
-                <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
-                    class="text-gray-800 border-2 border-green-800 hover:bg-green-600 hover:text-white focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
-                    type="button">Level Kejadian
-                    <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                        viewBox="0 0 10 6">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="m1 1 4 4 4-4" />
-                    </svg>
-                </button>
+            <div class="px-2 flex items-center justify-between">
+                <div class="me-2">
+                    <label for="search" class="sr-only">Search</label>
+                    <div class="relative mt-1">
+                        <div
+                            class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
+                            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                            </svg>
+                        </div>
+                        <input type="text" id="table-search"
+                            class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-green-500 focus:border-green-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500"
+                            placeholder="Search ...">
+                    </div>
+                </div>
 
-                <!-- Dropdown menu -->
-                <div id="dropdown"
-                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
-                    <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
-                        <li>
-                            <a href="{{url()->current().'?level=1' }}"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Rendah</a>
-                        </li>
-                        <li>
-                            <a href="{{url()->current().'?level=2' }}"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sedang</a>
-                        </li>
-                        <li>
-                            <a href="{{url()->current().'?level=3' }}"
-                                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Tinggi</a>
-                        </li>
-                    </ul>
+                <div>
+                    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown1"
+                        class="text-gray-800 border-2 font-medium rounded-lg text-sm px-4 py-1.5 text-center inline-flex items-center"
+                        type="button">Status
+                        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 4 4 4-4" />
+                        </svg>
+                    </button>
+
+                    <!-- Dropdown menu -->
+                    <div id="dropdown1"
+                        class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+                            <li>
+                                <a href="{{ url()->current() }}"
+                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Status</a>
+                            </li>
+                            <li>
+                                <a href="{{ url()->current() . '?status=1' }}"
+                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Belum
+                                    Ditangani</a>
+                            </li>
+                            <li>
+                                <a href="{{ url()->current() . '?status=2' }}"
+                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Proses
+                                    Penanganan</a>
+                            </li>
+                            <li>
+                                <a href="{{ url()->current() . '?status=3' }}"
+                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Selesai</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
+                        class="text-gray-800 border-2 font-medium rounded-lg text-sm px-4 py-1.5 text-center inline-flex items-center"
+                        type="button">Level
+                        <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 10 6">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 4 4 4-4" />
+                        </svg>
+                    </button>
+
+                    <!-- Dropdown menu -->
+                    <div id="dropdown"
+                        class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700">
+                        <ul class="py-2 text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownHoverButton">
+                            <li>
+                                <a href="{{ url()->current() }}"
+                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Level</a>
+                            </li>
+                            <li>
+                                <a href="{{ url()->current() . '?level=1' }}"
+                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Rendah</a>
+                            </li>
+                            <li>
+                                <a href="{{ url()->current() . '?level=2' }}"
+                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sedang</a>
+                            </li>
+                            <li>
+                                <a href="{{ url()->current() . '?level=3' }}"
+                                    class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Tinggi</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <table id="table" class="w-full whitespace-no-wrap mt-4">
+        <table id="table" class="w-full whitespace-no-wrap">
             <thead>
                 <tr class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase bg-gray-50">
                     <th class="px-4 py-3 cursor-pointer">
@@ -177,6 +235,12 @@
                                 Detail
                             </button>
                         </a>
+                        <a href="{{ route('user.laporan.edit', $report->id) }}">
+                            <button type="button"
+                                class="px-5 py-2 focus:outline-none text text-white bg-yellow-700 hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 font-medium rounded-lg text-sm me-2 mb-2">
+                                Edit
+                            </button>
+                        </a>
                     </td>
                 </tr>
                 @endforeach
@@ -191,7 +255,7 @@
 <div class="grid gap-6 mb-8 md:grid-cols-2">
     <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
         <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-            Jumlah Kejadian Menurut Waktud
+            Jumlah Kejadian Menurut Waktu
         </h4>
         <canvas id="chart"></canvas>
         <div class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
@@ -202,28 +266,6 @@
             </div>
         </div>
     </div>
-    <div class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800">
-        <h4 class="mb-4 font-semibold text-gray-800 dark:text-gray-300">
-            Revenue
-        </h4>
-        <canvas id="pie"></canvas>
-        <div class="flex justify-center mt-4 space-x-3 text-sm text-gray-600 dark:text-gray-400">
-            <!-- Chart legend -->
-            <div class="flex items-center">
-                <span class="inline-block w-3 h-3 mr-1 bg-blue-500 rounded-full"></span>
-                <span>Shirts</span>
-            </div>
-            <div class="flex items-center">
-                <span class="inline-block w-3 h-3 mr-1 bg-teal-600 rounded-full"></span>
-                <span>Shoes</span>
-            </div>
-            <div class="flex items-center">
-                <span class="inline-block w-3 h-3 mr-1 bg-purple-600 rounded-full"></span>
-                <span>Bags</span>
-            </div>
-        </div>
-    </div>
-</div>
 </div>
 @endsection
 
@@ -231,20 +273,24 @@
 <script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 
-<script src="https://cdn.datatables.net/2.1.0/js/dataTables.tailwindcss.js"></script>
+{{-- <script src="https://cdn.datatables.net/2.1.0/js/dataTables.tailwindcss.js"></script> --}}
 
 <script>
     $(document).ready(function() {
-            $('#table').DataTable({
+            var table = $('#table').DataTable({
                 columns: [null, null, null, null, null, {
-                    orderable: false
-                }, ],
+                    orderable: false,
+                }],
                 order: [
-                    [1, "desc"]
+                    [1, 'asc']
                 ],
-                searching: false,
                 paging: false,
-                info: false
+                info: false,
+                searching: true
+            });
+
+            $('#table-search').on('keyup', function() {
+                table.search(this.value).draw();
             });
         });
 
@@ -254,7 +300,7 @@
                 data: {
                     labels: @json($chartData['labels']),
                     datasets: [{
-                        label: 'Laporan Kejadian',
+                        label: 'Kejadian',
                         backgroundColor: '#0694a2',
                         // borderColor: window.chartColors.red,
                         borderWidth: 1,

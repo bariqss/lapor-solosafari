@@ -19,16 +19,54 @@ class ReportController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $laporanMasuk = DB::table('reports')->count();
         $laporanDitangani = DB::table('reports')->where('status', '2')->count();
         $laporanTertangani = DB::table('reports')->where('status', '3')->count();
         $laporanDitolak = DB::table('reports')->where('validasi', '2')->count();
 
+        $reportsChart = Report::selectRaw('MONTH(date) as month, COUNT(*) as count')
+            ->groupBy('month')
+            ->pluck('count', 'month');
+
+        $months = [
+            1 => 'Januari',
+            2 => 'Februari',
+            3 => 'Maret',
+            4 => 'April',
+            5 => 'Mei',
+            6 => 'Juni',
+            7 => 'Juli',
+            8 => 'Agustus',
+            9 => 'September',
+            10 => 'Oktober',
+            11 => 'November',
+            12 => 'Desember'
+        ];
+
+        $data = array_fill(1, 12, 0);
+        foreach ($reportsChart as $month => $count) {
+            $data[$month] = $count;
+        }
+
+        $chartData = [
+            'labels' => array_values($months),
+            'data' => array_values($data)
+        ];
+
+        $reports = Report::where(function ($q) use ($request) {
+            if (isset($request->level)) {
+                $q->where('level', $request->query('level'));
+            }
+            if (isset($request->status)) {
+                $q->where('status', $request->query('status'));
+            }
+        })->paginate(10);
+
         $reports = Report::paginate(15);
 
-        return view('operator.manajemen-laporan.index', compact('reports', 'laporanMasuk', 'laporanDitangani', 'laporanTertangani', 'laporanDitolak'));
+        return view('operator.manajemen-laporan.index', compact('reports', 'laporanMasuk', 'laporanDitangani', 'laporanTertangani', 'laporanDitolak', 'chartData'));
     }
 
     /**
@@ -42,9 +80,7 @@ class ReportController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-    }
+    public function store(Request $request) {}
 
     /**
      * Display the specified resource.
@@ -56,7 +92,7 @@ class ReportController extends Controller
         $report = Report::where('id', $id)->firstOrFail();
 
         // dd($report->penanganan);
-        
+
         return view('operator.manajemen-laporan.view', compact('report', 'location', 'categories'));
     }
     /**
